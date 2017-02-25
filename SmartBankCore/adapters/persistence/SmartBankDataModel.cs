@@ -5,12 +5,10 @@ namespace SmartBankCore.adapters.persistence
 {
     using System.Data.Entity;
 
-    public partial class SmartBankDataModel : DbContext
+    public class SmartBankDataModel : DbContext
     {
         public SmartBankDataModel()
-            : base("name=SmartBankDataModel")
-        {
-        }
+            : base("name=SmartBankDataModel"){}
 
         public virtual DbSet<BankAccount> BANK_ACCOUNTS { get; set; }
         public virtual DbSet<BankUser> BANK_USERS { get; set; }
