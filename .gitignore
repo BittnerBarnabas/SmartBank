@@ -1,0 +1,8 @@
+
+packages/
+
+\.vs/
+
+SmartBankCore/bin/
+
+SmartBankCore/obj/
