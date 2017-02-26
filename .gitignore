@@ -6,3 +6,7 @@ packages/
 SmartBankCore/bin/
 
 SmartBankCore/obj/
+
+SmartBankUi/bin/
+
+SmartBankUi/obj/

@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26206.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBankCore", "SmartBankCore\SmartBankCore.csproj", "{C13ACF13-38AF-4C42-8872-988A1C0F9144}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBankUi", "SmartBankUi\SmartBankUi.csproj", "{BF629499-90CD-4157-9E03-D2F5345F26ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,18 @@ Global
 		{C13ACF13-38AF-4C42-8872-988A1C0F9144}.Release|x64.Build.0 = Release|Any CPU
 		{C13ACF13-38AF-4C42-8872-988A1C0F9144}.Release|x86.ActiveCfg = Release|Any CPU
 		{C13ACF13-38AF-4C42-8872-988A1C0F9144}.Release|x86.Build.0 = Release|Any CPU
+		{BF629499-90CD-4157-9E03-D2F5345F26ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BF629499-90CD-4157-9E03-D2F5345F26ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BF629499-90CD-4157-9E03-D2F5345F26ED}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BF629499-90CD-4157-9E03-D2F5345F26ED}.Debug|x64.Build.0 = Debug|Any CPU
+		{BF629499-90CD-4157-9E03-D2F5345F26ED}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BF629499-90CD-4157-9E03-D2F5345F26ED}.Debug|x86.Build.0 = Debug|Any CPU
+		{BF629499-90CD-4157-9E03-D2F5345F26ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BF629499-90CD-4157-9E03-D2F5345F26ED}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BF629499-90CD-4157-9E03-D2F5345F26ED}.Release|x64.ActiveCfg = Release|Any CPU
+		{BF629499-90CD-4157-9E03-D2F5345F26ED}.Release|x64.Build.0 = Release|Any CPU
+		{BF629499-90CD-4157-9E03-D2F5345F26ED}.Release|x86.ActiveCfg = Release|Any CPU
+		{BF629499-90CD-4157-9E03-D2F5345F26ED}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
