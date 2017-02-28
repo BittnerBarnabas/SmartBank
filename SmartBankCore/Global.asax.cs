@@ -20,6 +20,7 @@ namespace SmartBankCore
             container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
 
             container.Register<IRepository<BankUser, String>, BankUserRepository>();
+            container.Register<IRepository<BankAccount, String>, BankAccountRepository>();
             container.Register<DbContext, SmartBankDataModel>(Lifestyle.Scoped);
 
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);

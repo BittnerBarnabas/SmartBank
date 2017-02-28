@@ -52,5 +52,10 @@ namespace SmartBankCore.domain.persistence.repository
         {
             throw new NotImplementedException();
         }
+
+        public void Commit()
+        {
+            _dbContext.SaveChanges();
+        }
     }
 }

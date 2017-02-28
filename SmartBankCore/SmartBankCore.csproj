@@ -109,6 +109,8 @@
     <Compile Include="adapters\persistence\SmartBankDataModel.cs" />
     <Compile Include="application\startup\WebApiConfig.cs" />
     <Compile Include="Controllers\TestController.cs" />
+    <Compile Include="domain\persistence\repository\AbstractRepositoryImpl.cs" />
+    <Compile Include="domain\persistence\repository\BankAccountRepository.cs" />
     <Compile Include="domain\persistence\repository\BankUserRepository.cs" />
     <Compile Include="domain\persistence\repository\IRepository.cs" />
     <Compile Include="Global.asax.cs">
