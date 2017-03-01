@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Web.Http;
+using Serilog;
 using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using SmartBankCore.adapters.persistence;
@@ -14,6 +15,11 @@ namespace SmartBankCore
     {
         protected void Application_Start()
         {
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.LiterateConsole()
+                .CreateLogger();
+
             GlobalConfiguration.Configure(WebApiConfig.Register);
 
             var container = new Container();
