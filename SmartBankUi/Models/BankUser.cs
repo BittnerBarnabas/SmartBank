@@ -8,11 +8,6 @@ namespace SmartBankUi.Models
 {
     public class BankUser
     {
-        public BankUser()
-        {
-            UserId = Guid.NewGuid().ToString().Substring(0, 12);
-        }
-        public string UserId { get; set; }
         [Required(ErrorMessage = "Username is required")]
         [StringLength(16, ErrorMessage = "Maximum username length is 16")]
         public string Username { get; set; }

@@ -17,7 +17,7 @@ namespace SmartBankCore.application.controllers
         }
         
         [HttpGet]
-        [Route("adduser/{id}")]
+        [Route("getuser/{id}")]
         public IHttpActionResult GetBankUsersById(string id)
         {
             return Ok(_repository.FindById(id));
