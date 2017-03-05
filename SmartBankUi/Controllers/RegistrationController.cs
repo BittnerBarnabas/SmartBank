@@ -2,16 +2,16 @@
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
 using Serilog;
 using SmartBankUi.Models;
+using SmartBankUi.Models.Util;
 
 namespace SmartBankUi.Controllers
 {
     public class RegistrationController : Controller
     {
         private ILogger LOG = Log.ForContext<RegistrationController>();
-        // GET: Registration
+
         public ActionResult Index()
         {
             return View();
@@ -20,13 +20,16 @@ namespace SmartBankUi.Controllers
         [HttpPost]
         public ActionResult Index(BankUser user)
         {
+            var passwordAndSalt = CryptographyUtils.GenerateHashAndSalt(user.Password);
+            user.Password = passwordAndSalt.Item1;
+            user.Salt = passwordAndSalt.Item2;
+
             using (var client = new HttpClient())
             {
                 var hostname = "http://localhost:49848";
                 var addUserPath = "/api/users/adduser";
                 client.BaseAddress = new Uri(hostname);
-                var link = hostname + addUserPath;
-                LOG.Debug("Posting user data to: {link}", link);
+                LOG.Debug("Posting user data to: {0}", hostname + addUserPath);
                 var result = client.PostAsync(addUserPath, user, new JsonMediaTypeFormatter()).Result;
                 if (result.IsSuccessStatusCode)
                 {
@@ -34,12 +37,11 @@ namespace SmartBankUi.Controllers
                 }
                 else
                 {
-                    string content = result.Content.ReadAsStringAsync().Result;
-                    Console.WriteLine("oops, an error occurred, here's the raw response: {0}", content);
+                    LOG.Warning("An error occured when sending user: {user}", user);
+                    LOG.Debug("The error was: {0}", result.Content.ReadAsStringAsync().Result);
                 }
             }
             return Index();
         }
-
     }
 }

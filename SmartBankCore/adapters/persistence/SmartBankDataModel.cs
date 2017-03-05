@@ -72,6 +72,12 @@ namespace SmartBankCore.adapters.persistence
                 .IsRequired();
 
             modelBuilder.Entity<BankUser>()
+                .Property(e => e.Salt)
+                .HasColumnName("SALT")
+                .HasMaxLength(32)
+                .IsRequired();
+
+            modelBuilder.Entity<BankUser>()
                 .ToTable("BANK_USERS")
                 .HasKey(e => e.Username)
                 .HasMany(e => e.BANK_ACCOUNTS)

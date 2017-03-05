@@ -13,6 +13,7 @@ namespace SmartBankCore.domain.persistence
         public string Name { get; set; }
         public string Password { get; set; }
         public int Pin { get; set; }
+        public string Salt { get; set; }
         public ICollection<BankAccount> BANK_ACCOUNTS { get; set; }
     }
 }

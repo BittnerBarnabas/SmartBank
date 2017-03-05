@@ -20,10 +20,11 @@ namespace SmartBankUi.Models
         [Required(ErrorMessage = "Pin is required")]
         [Range(1111,9999, ErrorMessage = "Pin must be between 1111 and 9999")]
         public int Pin { get; set; }
+        public string Salt { get; set; }
 
         public override string ToString()
         {
-            return $"{{ {nameof(Username)}: {Username}, {nameof(Name)}: {Name}, {nameof(Password)}: {Password}, {nameof(Pin)}: {Pin} }}";
+            return $"{nameof(Username)}: {Username}, {nameof(Name)}: {Name}, {nameof(Password)}: {Password}, {nameof(Pin)}: {Pin}, {nameof(Salt)}: {Salt}";
         }
     }
 }
