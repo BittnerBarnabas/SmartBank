@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Net.Http.Formatting;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using Serilog;
 using SmartBankUi.Models;
 
@@ -9,6 +10,7 @@ namespace SmartBankUi.Controllers
 {
     public class RegistrationController : Controller
     {
+        private ILogger LOG = Log.ForContext<RegistrationController>();
         // GET: Registration
         public ActionResult Index()
         {
@@ -20,11 +22,15 @@ namespace SmartBankUi.Controllers
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("http://localhost:49848");
-                var result = client.PostAsync("/api/users/adduser", user, new JsonMediaTypeFormatter()).Result;
+                var hostname = "http://localhost:49848";
+                var addUserPath = "/api/users/adduser";
+                client.BaseAddress = new Uri(hostname);
+                var link = hostname + addUserPath;
+                LOG.Debug("Posting user data to: {link}", link);
+                var result = client.PostAsync(addUserPath, user, new JsonMediaTypeFormatter()).Result;
                 if (result.IsSuccessStatusCode)
                 {
-                    Log.Information("Performance instance successfully sent to the API");
+                    LOG.Information("Bank user successfully sent to API {user}", user);
                 }
                 else
                 {

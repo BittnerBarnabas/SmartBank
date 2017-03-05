@@ -14,7 +14,7 @@ namespace SmartBankUi
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .WriteTo.Trace()
+                .WriteTo.Trace(outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] [{SourceContext}] {Message}{NewLine}{Exception}")
                 .CreateLogger();
             Log.Information("Logger is initialized");
             AreaRegistration.RegisterAllAreas();
