@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data.Entity.Validation;
+﻿using System.Data.Entity.Validation;
 using System.Web.Http;
 using Serilog;
 using SmartBankCore.domain.persistence;
@@ -10,7 +9,7 @@ namespace SmartBankCore.application.controllers
     [RoutePrefix("api/users")]
     public class BankUsersController : ApiController
     {
-        private ILogger LOG = Log.ForContext<BankUsersController>();
+        private readonly ILogger LOG = Log.ForContext<BankUsersController>();
         private readonly BankUserRepository _repository;
 
         public BankUsersController(BankUserRepository repository)
@@ -22,7 +21,15 @@ namespace SmartBankCore.application.controllers
         [Route("getuser/{id}")]
         public IHttpActionResult GetBankUsersById(string id)
         {
-            return Ok(_repository.FindById(id));
+            LOG.Debug("Request received with Id: {id}", id);
+            var result = _repository.FindById(id);
+            if (result == null)
+            {
+                LOG.Warning("Didn't find user with id: {id}", id);
+                return NotFound();
+            }
+            LOG.Debug("Found user with id: {0}", id);
+            return Ok(result);
         }
 
         [HttpPost]
