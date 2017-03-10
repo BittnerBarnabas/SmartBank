@@ -6,32 +6,32 @@ namespace SmartBankUi.Models.Util
 {
     public class CryptographyUtils
     {
-        public static Tuple<String, String> GenerateHashAndSalt(String password)
+        public static Tuple<string, string> GenerateHashAndSalt(string password)
         {
             // generate a 128-bit salt using a secure PRNG
-            byte[] salt = new byte[128 / 8];
+            var salt = new byte[128 / 8];
             using (var rng = RandomNumberGenerator.Create())
             {
                 rng.GetBytes(salt);
             }
 
             var hashed = Hash(password, salt);
-            return new Tuple<String, String>(hashed, Convert.ToBase64String(salt));
+            return new Tuple<string, string>(hashed, Convert.ToBase64String(salt));
         }
 
-        public static String GenerateHash(String password, String salt)
+        public static string GenerateHash(string password, string salt)
         {
             return Hash(password, Convert.FromBase64String(salt));
         }
 
-        private static String Hash(String text, byte[] salt)
+        private static string Hash(string text, byte[] salt)
         {
             return Convert.ToBase64String(KeyDerivation.Pbkdf2(
-                password: text,
-                salt: salt,
-                prf: KeyDerivationPrf.HMACSHA1,
-                iterationCount: 10000,
-                numBytesRequested: 256 / 4));
+                text,
+                salt,
+                KeyDerivationPrf.HMACSHA1,
+                10000,
+                256 / 4));
         }
 
         public static bool HaveTheSamePassword(BankUser newUser, BankUser originalUser)

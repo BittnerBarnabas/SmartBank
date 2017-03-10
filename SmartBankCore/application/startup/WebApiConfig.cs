@@ -13,7 +13,7 @@ namespace SmartBankCore.application.startup
             config.MapHttpAttributeRoutes();
 
             config.Formatters.JsonFormatter.SupportedMediaTypes
-                    .Add(new MediaTypeHeaderValue("text/html"));
+                .Add(new MediaTypeHeaderValue("text/html"));
         }
     }
 }

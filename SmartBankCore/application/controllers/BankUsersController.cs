@@ -9,14 +9,14 @@ namespace SmartBankCore.application.controllers
     [RoutePrefix("api/users")]
     public class BankUsersController : ApiController
     {
-        private readonly ILogger LOG = Log.ForContext<BankUsersController>();
         private readonly BankUserRepository _repository;
+        private readonly ILogger LOG = Log.ForContext<BankUsersController>();
 
         public BankUsersController(BankUserRepository repository)
         {
             _repository = repository;
         }
-        
+
         [HttpGet]
         [Route("getuser/{id}")]
         public IHttpActionResult GetBankUsersById(string id)

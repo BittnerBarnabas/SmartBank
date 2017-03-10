@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using Serilog;
@@ -10,13 +11,14 @@ using SmartBankUi.Services;
 
 namespace SmartBankUi
 {
-    public class MvcApplication : System.Web.HttpApplication
+    public class MvcApplication : HttpApplication
     {
         protected void Application_Start()
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .WriteTo.Trace(outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] [{SourceContext}] {Message}{NewLine}{Exception}")
+                .WriteTo.Trace(
+                    outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] [{SourceContext}] {Message}{NewLine}{Exception}")
                 .CreateLogger();
             var LOG = Log.ForContext<MvcApplication>();
 
@@ -24,7 +26,7 @@ namespace SmartBankUi
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             LOG.Information("Registered routing config");
-            
+
             LOG.Information("Registering IoC container");
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();

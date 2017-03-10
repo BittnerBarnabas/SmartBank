@@ -11,9 +11,9 @@ namespace SmartBankUi.Controllers
 {
     public class AccountController : Controller
     {
-        private ILogger LOG = Log.ForContext<AccountController>();
+        private readonly IAccountControllerService<UserIdentity> _accountControllerService;
+        private readonly ILogger LOG = Log.ForContext<AccountController>();
 
-        private IAccountControllerService<UserIdentity> _accountControllerService;
         public AccountController(IAccountControllerService<UserIdentity> accountControllerService)
         {
             _accountControllerService = accountControllerService;
@@ -43,14 +43,14 @@ namespace SmartBankUi.Controllers
                 LOG.Debug("Received user : {0}", receivedUser);
 
                 Login(user, receivedUser);
-            }   
-            return RedirectToAction("Index","Home");
+            }
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Logout()
         {
             _accountControllerService.SingOut(System.Web.HttpContext.Current);
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
 
         private void Login(BankUser user, BankUser receivedUser)
@@ -66,6 +66,5 @@ namespace SmartBankUi.Controllers
                 ModelState.AddModelError("invalidCredentials", "Username or password is incorrect");
             }
         }
-
     }
 }

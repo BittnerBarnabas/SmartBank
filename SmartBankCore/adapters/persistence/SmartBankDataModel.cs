@@ -1,14 +1,15 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using SmartBankCore.domain.persistence;
 
 namespace SmartBankCore.adapters.persistence
 {
-    using System.Data.Entity;
-
     public class SmartBankDataModel : DbContext
     {
         public SmartBankDataModel()
-            : base("name=SmartBankDataModel"){}
+            : base("name=SmartBankDataModel")
+        {
+        }
 
         public virtual DbSet<BankAccount> BANK_ACCOUNTS { get; set; }
         public virtual DbSet<BankUser> BANK_USERS { get; set; }
@@ -44,7 +45,6 @@ namespace SmartBankCore.adapters.persistence
             modelBuilder.Entity<BankAccount>()
                 .ToTable("BANK_ACCOUNTS")
                 .HasKey(e => e.ACCOUNT_NUMBER);
-
 
             // *** BANK_USERS config ***
 

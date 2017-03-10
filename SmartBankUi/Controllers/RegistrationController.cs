@@ -10,7 +10,7 @@ namespace SmartBankUi.Controllers
 {
     public class RegistrationController : Controller
     {
-        private ILogger LOG = Log.ForContext<RegistrationController>();
+        private readonly ILogger LOG = Log.ForContext<RegistrationController>();
 
         public ActionResult Index()
         {

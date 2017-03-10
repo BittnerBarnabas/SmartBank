@@ -11,16 +11,17 @@ namespace SmartBankUi.Services
 {
     public class AccountControllerServiceImpl : IAccountControllerService<UserIdentity>
     {
-        private ILogger LOG = Log.ForContext<AccountControllerServiceImpl>();
+        private readonly ILogger LOG = Log.ForContext<AccountControllerServiceImpl>();
 
-        public bool SignIn(UserIdentity userIdentity, Func<UserIdentity, ICollection<Claim>> claimsProvider, HttpContext httpContext)
+        public bool SignIn(UserIdentity userIdentity, Func<UserIdentity, ICollection<Claim>> claimsProvider,
+            HttpContext httpContext)
         {
             try
             {
                 var identity = new ClaimsIdentity(claimsProvider.Invoke(userIdentity),
                     DefaultAuthenticationTypes.ApplicationCookie);
 
-                httpContext.GetOwinContext().Authentication.SignIn(new AuthenticationProperties()
+                httpContext.GetOwinContext().Authentication.SignIn(new AuthenticationProperties
                 {
                     AllowRefresh = true,
                     ExpiresUtc = DateTime.UtcNow.AddHours(1)
@@ -34,7 +35,7 @@ namespace SmartBankUi.Services
             {
                 LOG.Error("Login failed with exception: {0}", exc);
                 return false;
-            } 
+            }
         }
 
         public bool SignInDefault(UserIdentity userIdentity, HttpContext httpContext)
@@ -51,11 +52,11 @@ namespace SmartBankUi.Services
 
         private List<Claim> DefaultClaims(UserIdentity userIdentity)
         {
-            return new List<Claim>()
-                {
-                    new Claim(ClaimTypes.Name, userIdentity.Name),
-                    new Claim(ClaimTypes.NameIdentifier, userIdentity.UserName)
-                };
+            return new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, userIdentity.Name),
+                new Claim(ClaimTypes.NameIdentifier, userIdentity.UserName)
+            };
         }
     }
 }

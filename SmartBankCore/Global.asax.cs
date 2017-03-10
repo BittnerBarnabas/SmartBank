@@ -1,5 +1,5 @@
-﻿using System;
-using System.Data.Entity;
+﻿using System.Data.Entity;
+using System.Web;
 using System.Web.Http;
 using Serilog;
 using SimpleInjector;
@@ -11,13 +11,14 @@ using SmartBankCore.domain.persistence.repository;
 
 namespace SmartBankCore
 {
-    public class WebApiApplication : System.Web.HttpApplication
+    public class WebApiApplication : HttpApplication
     {
         protected void Application_Start()
         {
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
-                .WriteTo.Trace(outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] [{SourceContext}] {Message}{NewLine}{Exception}")
+                .WriteTo.Trace(
+                    outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] [{SourceContext}] {Message}{NewLine}{Exception}")
                 .CreateLogger();
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
@@ -25,8 +26,8 @@ namespace SmartBankCore
             var container = new Container();
             container.Options.DefaultScopedLifestyle = new WebApiRequestLifestyle();
 
-            container.Register<IRepository<BankUser, String>, BankUserRepository>();
-            container.Register<IRepository<BankAccount, String>, BankAccountRepository>();
+            container.Register<IRepository<BankUser, string>, BankUserRepository>();
+            container.Register<IRepository<BankAccount, string>, BankAccountRepository>();
             container.Register<DbContext, SmartBankDataModel>(Lifestyle.Scoped);
 
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);

@@ -8,10 +8,12 @@ namespace SmartBankCore.domain.persistence.repository
     public class AbstractRepositoryImpl<TEntity, TIdentity> : IRepository<TEntity, TIdentity> where TEntity : class
     {
         private readonly DbContext _dbContext;
+
         public AbstractRepositoryImpl(DbContext dbContext)
         {
             _dbContext = dbContext;
         }
+
         public TEntity FindById(TIdentity id)
         {
             return _dbContext.Set<TEntity>().Find(id);
