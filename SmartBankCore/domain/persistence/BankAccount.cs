@@ -4,10 +4,10 @@ namespace SmartBankCore.domain.persistence
 {
     public class BankAccount
     {
-        public int ACCOUNT_NUMBER { get; set; }
-        public string OWNER { get; set; }
-        public int BALANCE { get; set; }
-        public DateTime CREATED_DATE { get; set; }
+        public int AccountNumber { get; set; }
+        public string Owner { get; set; }
+        public int Balance { get; set; }
+        public DateTime CreatedDate { get; set; }
         public virtual BankUser BankUser { get; set; }
     }
 }

@@ -20,32 +20,32 @@ namespace SmartBankCore.adapters.persistence
             // *** BANK_ACCOUNTS *** config
 
             modelBuilder.Entity<BankAccount>()
-                .Property(e => e.OWNER)
+                .Property(e => e.Owner)
                 .IsRequired()
                 .HasMaxLength(12)
                 .HasColumnName("OWNER")
                 .IsUnicode(false);
 
             modelBuilder.Entity<BankAccount>()
-                .Property(e => e.BALANCE)
+                .Property(e => e.Balance)
                 .IsRequired()
                 .HasColumnName("BALANCE");
 
             modelBuilder.Entity<BankAccount>()
-                .Property(e => e.CREATED_DATE)
+                .Property(e => e.CreatedDate)
                 .IsRequired()
                 .HasColumnType("date")
                 .HasColumnName("CREATED_DATE");
 
             modelBuilder.Entity<BankAccount>()
-                .Property(e => e.ACCOUNT_NUMBER)
+                .Property(e => e.AccountNumber)
                 .IsRequired()
                 .HasColumnName("ACCOUNT_NUMBER")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             modelBuilder.Entity<BankAccount>()
                 .ToTable("BANK_ACCOUNT")
-                .HasKey(e => e.ACCOUNT_NUMBER);
+                .HasKey(e => e.AccountNumber);
 
             // *** BANK_USERS config ***
 
@@ -83,7 +83,7 @@ namespace SmartBankCore.adapters.persistence
                 .HasKey(e => e.Username)
                 .HasMany(e => e.BankAccounts)
                 .WithRequired(e => e.BankUser)
-                .HasForeignKey(e => e.OWNER)
+                .HasForeignKey(e => e.Owner)
                 .WillCascadeOnDelete(true);
         }
     }

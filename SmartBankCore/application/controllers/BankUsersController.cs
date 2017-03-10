@@ -37,7 +37,7 @@ namespace SmartBankCore.application.controllers
         [Route("adduser")]
         public IHttpActionResult PutBankUser(BankUser user)
         {
-            var acc = new BankAccount { ACCOUNT_NUMBER = 1234, BALANCE = 500, CREATED_DATE = DateTime.Now };
+            var acc = new BankAccount {AccountNumber = 1234, Balance = 500, CreatedDate = DateTime.Now};
             var test = new BankUser
             {
                 Username = "cica",
@@ -45,7 +45,7 @@ namespace SmartBankCore.application.controllers
                 Password = "abc",
                 Pin = 123,
                 Salt = "as",
-                BankAccounts = new List<BankAccount> { acc }
+                BankAccounts = new List<BankAccount> {acc}
             };
             _repository.Save(test);
             _repository.Commit();
