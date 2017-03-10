@@ -9,6 +9,7 @@ namespace SmartBankCore.adapters.persistence
         public SmartBankDataModel()
             : base("name=SmartBankDataModel")
         {
+            //Configuration.LazyLoadingEnabled = false;
         }
 
         public virtual DbSet<BankAccount> BANK_ACCOUNTS { get; set; }
@@ -43,7 +44,7 @@ namespace SmartBankCore.adapters.persistence
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 
             modelBuilder.Entity<BankAccount>()
-                .ToTable("BANK_ACCOUNTS")
+                .ToTable("BANK_ACCOUNT")
                 .HasKey(e => e.ACCOUNT_NUMBER);
 
             // *** BANK_USERS config ***
@@ -80,7 +81,7 @@ namespace SmartBankCore.adapters.persistence
             modelBuilder.Entity<BankUser>()
                 .ToTable("BANK_USERS")
                 .HasKey(e => e.Username)
-                .HasMany(e => e.BANK_ACCOUNTS)
+                .HasMany(e => e.BankAccounts)
                 .WithRequired(e => e.BankUser)
                 .HasForeignKey(e => e.OWNER)
                 .WillCascadeOnDelete(true);

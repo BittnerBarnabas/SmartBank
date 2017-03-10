@@ -7,57 +7,57 @@ namespace SmartBankCore.domain.persistence.repository
 {
     public class AbstractRepositoryImpl<TEntity, TIdentity> : IRepository<TEntity, TIdentity> where TEntity : class
     {
-        private readonly DbContext _dbContext;
+        protected readonly DbContext DbContext;
 
         public AbstractRepositoryImpl(DbContext dbContext)
         {
-            _dbContext = dbContext;
+            DbContext = dbContext;
         }
 
-        public TEntity FindById(TIdentity id)
+        public virtual TEntity FindById(TIdentity id)
         {
-            return _dbContext.Set<TEntity>().Find(id);
+            return DbContext.Set<TEntity>().Find(id);
         }
 
-        public IEnumerable<TEntity> FindAll()
+        public virtual IEnumerable<TEntity> FindAll()
         {
-            return _dbContext.Set<TEntity>().ToList();
+            return DbContext.Set<TEntity>().ToList();
         }
 
-        public void DeleteById(TIdentity id)
+        public virtual void DeleteById(TIdentity id)
         {
-            _dbContext.Set<TEntity>().Remove(FindById(id));
+            DbContext.Set<TEntity>().Remove(FindById(id));
         }
 
-        public void DeleteAll()
+        public virtual void DeleteAll()
         {
             throw new NotImplementedException();
         }
 
-        public long Count()
+        public virtual long Count()
         {
-            return _dbContext.Set<TEntity>().Count();
+            return DbContext.Set<TEntity>().Count();
         }
 
-        public bool Exists(TIdentity id)
+        public virtual bool Exists(TIdentity id)
         {
             return FindById(id) != null;
         }
 
-        public TS Save<TS>(TS entity) where TS : TEntity
+        public virtual TS Save<TS>(TS entity) where TS : TEntity
         {
-            _dbContext.Set<TEntity>().Add(entity);
+            DbContext.Set<TEntity>().Add(entity);
             return entity;
         }
 
-        public IEnumerable<TS> Save<TS>(IEnumerable<TS> entities) where TS : TEntity
+        public virtual IEnumerable<TS> Save<TS>(IEnumerable<TS> entities) where TS : TEntity
         {
             throw new NotImplementedException();
         }
 
-        public void Commit()
+        public virtual void Commit()
         {
-            _dbContext.SaveChanges();
+            DbContext.SaveChanges();
         }
     }
 }

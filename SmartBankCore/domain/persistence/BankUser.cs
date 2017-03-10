@@ -6,7 +6,7 @@ namespace SmartBankCore.domain.persistence
     {
         public BankUser()
         {
-            BANK_ACCOUNTS = new HashSet<BankAccount>();
+            BankAccounts = new HashSet<BankAccount>();
         }
 
         public string Username { get; set; }
@@ -14,6 +14,6 @@ namespace SmartBankCore.domain.persistence
         public string Password { get; set; }
         public int Pin { get; set; }
         public string Salt { get; set; }
-        public ICollection<BankAccount> BANK_ACCOUNTS { get; set; }
+        public virtual ICollection<BankAccount> BankAccounts { get; set; }
     }
 }
