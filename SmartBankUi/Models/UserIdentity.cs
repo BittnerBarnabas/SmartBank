@@ -1,20 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNet.Identity.EntityFramework;
+﻿using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace SmartBankUi.Models
 {
     public class UserIdentity : IdentityUser
     {
         private UserIdentity() { }
-        public string username { get; set; }
-        public string name { get; set; }
+        public string UserName { get; set; }
+        public string Name { get; set; }
 
         public static UserIdentity FromBankUser(BankUser user)
         {
-            return new UserIdentity {name = user.Name, username = user.Username};
+            return new UserIdentity {Name = user.Name, UserName = user.Username};
         }
     }
 }

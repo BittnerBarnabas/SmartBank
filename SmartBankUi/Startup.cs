@@ -26,7 +26,7 @@ namespace SmartBankUi
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,
-                LoginPath = new PathString("/LogIn/Index")
+                LoginPath = new PathString("/Account/Index")
             });
 
             AntiForgeryConfig.UniqueClaimTypeIdentifier = ClaimTypes.NameIdentifier;
