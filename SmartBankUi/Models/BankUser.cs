@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace SmartBankUi.Models
 {
@@ -21,6 +22,8 @@ namespace SmartBankUi.Models
         public int Pin { get; set; }
 
         public string Salt { get; set; }
+
+        public ICollection<BankAccount> BankAccounts { get; set; } = new HashSet<BankAccount>();
 
         public override string ToString()
         {
