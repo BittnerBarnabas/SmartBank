@@ -18,7 +18,17 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("SmartBank", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-                @Html.ActionLink("Registration", "Index", "Registration", new { area = "" }, new { @class = "navbar-brand" })
+
+                @if (HttpContext.Current.User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("Details", "Index", "LogIn", new {area = ""}, new {@class = "navbar-brand"})
+                    @Html.ActionLink("Log Out", "Index", "LogIn", new {area = ""}, new {@class = "navbar-brand"})
+                }
+                else
+                {
+                    @Html.ActionLink("Registration", "Index", "Registration", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("LogIn", "Index", "LogIn", new { area = "" }, new { @class = "navbar-brand" })
+                }
 
             </div>
             <div class="navbar-collapse collapse">

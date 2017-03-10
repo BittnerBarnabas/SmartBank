@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
-using System.Security.Cryptography;
+using System.Security.Claims;
 using System.Threading.Tasks;
+using System.Web;
 using System.Web.Mvc;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using Microsoft.Owin.Security;
 using Serilog;
 using SmartBankUi.Models;
 using SmartBankUi.Models.Util;
@@ -37,18 +41,37 @@ namespace SmartBankUi.Controllers
                 var receivedUser = await result.Content.ReadAsAsync<BankUser>();
                 LOG.Debug("Received user : {0}", receivedUser);
 
-                if (CryptographyUtils.HaveTheSamePassword(user, receivedUser))
-                {
-                    LOG.Information("User is successfully logged in: {user}", receivedUser.Username);
-                }
-                else
-                {
-                    LOG.Warning("Access denied for user: {user}", user.Username);
-                }
+                Login(user, receivedUser);
             }   
             return RedirectToAction("Index","Home");
         }
 
+        private void Login(BankUser user, BankUser receivedUser)
+        {
+            if (CryptographyUtils.HaveTheSamePassword(user, receivedUser))
+            {
+                var claims = new List<Claim>()
+                {
+                    new Claim(ClaimTypes.Name, receivedUser.Name),
+                    new Claim(ClaimTypes.NameIdentifier, receivedUser.Username)
+                };
 
+                var identity = new ClaimsIdentity(claims, DefaultAuthenticationTypes.ApplicationCookie);
+
+                AuthenticationManager.SignIn(new AuthenticationProperties()
+                {
+                    AllowRefresh = true,
+                    ExpiresUtc = DateTime.UtcNow.AddHours(1)
+                }, identity);
+
+                LOG.Information("User successfully logged in: {0}, {1}", HttpContext.User.Identity.Name, HttpContext.User.Identity.IsAuthenticated);
+            }
+            else
+            {
+                LOG.Warning("Access denied for user: {user}", user.Username);
+            }
+        }
+
+        private IAuthenticationManager AuthenticationManager => HttpContext.GetOwinContext().Authentication;
     }
 }
