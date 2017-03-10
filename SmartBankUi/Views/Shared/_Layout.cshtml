@@ -20,9 +20,9 @@
                 @Html.ActionLink("SmartBank", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
 
                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
-                {
-                    @Html.ActionLink("Details", "Index", "Account", new {area = ""}, new {@class = "navbar-brand"})
-                    @Html.ActionLink("Log Out", "Logout", "Account", new {area = ""}, new {@class = "navbar-brand"})
+            {
+                    @Html.ActionLink("Details", "Index", "BankUserDetails", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("Log Out", "Logout", "Account", new { area = "" }, new { @class = "navbar-brand" })
                 }
                 else
                 {
@@ -31,8 +31,7 @@
                 }
             </div>
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                </ul>
+                <ul class="nav navbar-nav"></ul>
             </div>
         </div>
     </div>

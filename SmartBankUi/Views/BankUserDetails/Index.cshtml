@@ -1,0 +1,28 @@
+﻿@model SmartBankUi.Models.BankUser
+
+@{
+    ViewBag.Title = "Your bank accounts";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Account number
+        </th>
+        <th>
+            Balance
+        </th>
+    </tr>
+
+    @foreach (var item in Model.BankAccounts)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AccountNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Balance) HUF
+            </td>
+        </tr>
+    }
+</table>

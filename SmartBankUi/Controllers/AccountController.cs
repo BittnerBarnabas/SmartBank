@@ -32,10 +32,8 @@ namespace SmartBankUi.Controllers
 
             using (var client = new HttpClient())
             {
-                var hostname = "http://localhost:49848";
-                var addUserPath = "/api/users/getuser/" + user.Username;
-                client.BaseAddress = new Uri(hostname);
-                var result = client.GetAsync(hostname + addUserPath).Result;
+                client.BaseAddress = new Uri(WebApiUtils.HostName);
+                var result = client.GetAsync(WebApiUtils.HostName + WebApiUtils.GetUsedPath + user.Username).Result;
 
                 if (!result.IsSuccessStatusCode)
                 {
