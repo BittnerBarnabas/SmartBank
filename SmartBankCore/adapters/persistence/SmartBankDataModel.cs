@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
-using SmartBankCore.domain.persistence;
+using SmartBankCore.domain;
 
 namespace SmartBankCore.adapters.persistence
 {

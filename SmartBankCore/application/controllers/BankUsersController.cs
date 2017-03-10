@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity.Validation;
 using System.Web.Http;
 using Serilog;
-using SmartBankCore.domain.persistence;
+using SmartBankCore.domain;
 using SmartBankCore.domain.persistence.repository;
 
 namespace SmartBankCore.application.controllers

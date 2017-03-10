@@ -113,8 +113,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="domain\persistence\BankAccount.cs" />
-    <Compile Include="domain\persistence\BankUser.cs" />
+    <Compile Include="domain\BankAccount.cs" />
+    <Compile Include="domain\BankUser.cs" />
     <Compile Include="adapters\persistence\SmartBankDataModel.cs" />
     <Compile Include="application\startup\WebApiConfig.cs" />
     <Compile Include="application\controllers\BankUsersController.cs" />

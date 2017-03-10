@@ -6,7 +6,7 @@ using SimpleInjector;
 using SimpleInjector.Integration.WebApi;
 using SmartBankCore.adapters.persistence;
 using SmartBankCore.application.startup;
-using SmartBankCore.domain.persistence;
+using SmartBankCore.domain;
 using SmartBankCore.domain.persistence.repository;
 
 namespace SmartBankCore
