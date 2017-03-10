@@ -15,8 +15,54 @@ namespace SmartBankCore.adapters.persistence
         public virtual DbSet<BankAccount> BANK_ACCOUNTS { get; set; }
         public virtual DbSet<BankUser> BANK_USERS { get; set; }
 
+        public virtual DbSet<Transaction> Transactions { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // *** TRANSACTIONS *** config
+
+            modelBuilder.Entity<Transaction>()
+                .Property(e => e.Type)
+                .IsRequired()
+                .HasColumnName("TRANS_TYPE");
+
+            modelBuilder.Entity<Transaction>()
+                .Property(e => e.Id)
+                .IsRequired()
+                .HasMaxLength(20)
+                .HasColumnName("TRANS_ID");
+
+            modelBuilder.Entity<Transaction>()
+                .Property(e => e.Amount)
+                .IsRequired()
+                .HasColumnName("AMOUNT");
+
+            modelBuilder.Entity<Transaction>()
+                .Property(e => e.RecipientAccountNumber)
+                .IsRequired()
+                .HasColumnName("RECIP_ACC_NUM");
+
+            modelBuilder.Entity<Transaction>()
+                .Property(e => e.RecipientUserName)
+                .IsRequired()
+                .HasMaxLength(128)
+                .HasColumnName("RECIP_USER_NAME");
+
+            modelBuilder.Entity<Transaction>()
+                .Property(e => e.SourceAccountNumber)
+                .IsRequired()
+                .HasColumnName("SRC_ACC_NUM");
+
+            modelBuilder.Entity<Transaction>()
+                .Property(e => e.TransactionDateTime)
+                .IsRequired()
+                .HasColumnType("datetime")
+                .HasColumnName("TRANS_DATE");
+
+            modelBuilder.Entity<Transaction>()
+                .ToTable("TRANSACTIONS")
+                .HasKey(e => e.Id);
+
             // *** BANK_ACCOUNTS *** config
 
             modelBuilder.Entity<BankAccount>()
