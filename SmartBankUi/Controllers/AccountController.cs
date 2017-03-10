@@ -37,7 +37,11 @@ namespace SmartBankUi.Controllers
                 client.BaseAddress = new Uri(hostname);
                 var result = client.GetAsync(hostname + addUserPath).Result;
 
-                if (!result.IsSuccessStatusCode) return RedirectToAction("Index", "Home");
+                if (!result.IsSuccessStatusCode)
+                {
+                    ModelState.AddModelError(string.Empty, "Username or password is incorrect.");
+                    return View();
+                }
 
                 var receivedUser = await result.Content.ReadAsAsync<BankUser>();
                 LOG.Debug("Received user : {0}", receivedUser);

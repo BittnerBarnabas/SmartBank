@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Data.Entity.Validation;
 using System.Web.Http;
 using Serilog;
 using SmartBankCore.domain.persistence;
@@ -37,19 +36,6 @@ namespace SmartBankCore.application.controllers
         [Route("adduser")]
         public IHttpActionResult PutBankUser(BankUser user)
         {
-            var acc = new BankAccount {AccountNumber = 1234, Balance = 500, CreatedDate = DateTime.Now};
-            var test = new BankUser
-            {
-                Username = "cica",
-                Name = "C",
-                Password = "abc",
-                Pin = 123,
-                Salt = "as",
-                BankAccounts = new List<BankAccount> {acc}
-            };
-            _repository.Save(test);
-            _repository.Commit();
-            /*
             _repository.Save(user);
             try
             {
@@ -59,7 +45,7 @@ namespace SmartBankCore.application.controllers
             {
                 LOG.Error("Entity validation failed: {0}", e);
                 return BadRequest();
-            }*/
+            }
             return Ok("Saved and commited user!");
         }
     }
