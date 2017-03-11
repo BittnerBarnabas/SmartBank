@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Mvc;
 using Serilog;
@@ -29,23 +28,18 @@ namespace SmartBankUi.Controllers
         public async Task<ActionResult> Index(BankUser user)
         {
             LOG.Debug("Received user login from : {user}", user);
+            var result = WebApiUtils.GetFromUrl(WebApiUtils.HostName, WebApiUtils.GetUserPath + user.Username);
 
-            using (var client = new HttpClient())
+            if (!result.IsSuccessStatusCode)
             {
-                client.BaseAddress = new Uri(WebApiUtils.HostName);
-                var result = client.GetAsync(WebApiUtils.HostName + WebApiUtils.GetUsedPath + user.Username).Result;
-
-                if (!result.IsSuccessStatusCode)
-                {
-                    ModelState.AddModelError(string.Empty, "Username or password is incorrect.");
-                    return View();
-                }
-
-                var receivedUser = await result.Content.ReadAsAsync<BankUser>();
-                LOG.Debug("Received user : {0}", receivedUser);
-
-                Login(user, receivedUser);
+                ModelState.AddModelError(string.Empty, "Username or password is incorrect.");
+                return View();
             }
+
+            var receivedUser = await result.Content.ReadAsAsync<BankUser>();
+            LOG.Debug("Received user : {0}", receivedUser);
+            Login(user, receivedUser);
+
             return RedirectToAction("Index", "Home");
         }
 

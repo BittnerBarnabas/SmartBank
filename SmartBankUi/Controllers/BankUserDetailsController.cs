@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using SmartBankUi.Models;
@@ -12,16 +11,10 @@ namespace SmartBankUi.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            using (var client = new HttpClient())
-            {
-                client.BaseAddress = new Uri(WebApiUtils.HostName);
-                var result =
-                    client.GetAsync(WebApiUtils.HostName + WebApiUtils.GetUsedPath +
-                                    HttpContext.User.Identity.GetUserId())
-                        .Result;
+            var result = WebApiUtils.GetFromUrl(WebApiUtils.HostName, WebApiUtils.GetUserPath +
+                                                                      HttpContext.User.Identity.GetUserId());
 
-                return View(result.Content.ReadAsAsync<BankUser>().Result);
-            }
+            return View(result.Content.ReadAsAsync<BankUser>().Result);
         }
     }
 }
