@@ -1,17 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+using System.Web.Http;
+using Serilog;
+using SmartBankCore.domain;
+using SmartBankCore.domain.persistence.repository;
 
 namespace SmartBankCore.application.controllers
 {
-    public class TransactionController : Controller
+    [RoutePrefix("api/transaction")]
+    public class TransactionController : ApiController
     {
-        // GET: Transaction
-        public ActionResult Index()
+        private readonly TransactionRepository _transactionRepository;
+        private readonly ILogger LOG = Log.ForContext<TransactionController>();
+
+        public TransactionController(TransactionRepository transactionRepository)
         {
-            return View();
+            _transactionRepository = transactionRepository;
+        }
+
+        [HttpGet]
+        [Route("forAccount/{accountNumber}")]
+        public List<Transaction> GetRelatedTransactions(int accountNumber)
+        {
+            LOG.Information("Getting transactions for accout number: {0}", accountNumber);
+            return _transactionRepository.FindTransactionsForAccountNumber(accountNumber).ToList();
         }
     }
 }

@@ -113,6 +113,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="application\controllers\TransactionController.cs" />
     <Compile Include="domain\BankAccount.cs" />
     <Compile Include="domain\BankUser.cs" />
     <Compile Include="adapters\persistence\SmartBankDataModel.cs" />
@@ -122,6 +123,9 @@
     <Compile Include="domain\persistence\repository\BankAccountRepository.cs" />
     <Compile Include="domain\persistence\repository\BankUserRepository.cs" />
     <Compile Include="domain\persistence\repository\IRepository.cs" />
+    <Compile Include="domain\persistence\repository\TransactionRepository.cs" />
+    <Compile Include="domain\Transaction.cs" />
+    <Compile Include="domain\TransactionType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
