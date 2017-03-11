@@ -1,4 +1,6 @@
-﻿using System.Net.Http;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 using System.Web.Mvc;
 using Serilog;
 using SmartBankUi.Models;
@@ -32,7 +34,7 @@ namespace SmartBankUi.Controllers
             if (!result.IsSuccessStatusCode || !Login(user, result.Content.ReadAsAsync<BankUser>().Result))
             {
                 LOG.Warning("Access denied for user: {user}", user.Username);
-                ModelState.AddModelError(string.Empty, "Username or password is incorrect.");
+                ModelState.AddModelError(string.Empty, "Login detauls are incorrect.");
                 return View();
             }
 
@@ -49,13 +51,17 @@ namespace SmartBankUi.Controllers
 
         private bool Login(BankUser user, BankUser receivedUser)
         {
-            if (CryptographyUtils.HaveTheSamePassword(user, receivedUser))
-            {
-                _accountControllerService.SignInDefault(UserIdentity.FromBankUser(receivedUser),
-                    System.Web.HttpContext.Current);
-                return true;
-            }
-            return false;
+            if (!CryptographyUtils.HaveTheSamePassword(user, receivedUser) ||
+                !MatchesAccountNumber(user.LoginBankAccountNumer, receivedUser.BankAccounts) ||
+                !user.Pin.Equals(receivedUser.Pin)) return false;
+
+            _accountControllerService.SignInDefault(UserIdentity.FromBankUser(receivedUser),
+                System.Web.HttpContext.Current);
+
+            return true;
         }
+
+        private static bool MatchesAccountNumber(int accountNumber, IEnumerable<BankAccount> bankAccounts)
+            => bankAccounts.Any(bankAccount => bankAccount.AccountNumber.Equals(accountNumber));
     }
 }
