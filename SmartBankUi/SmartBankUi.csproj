@@ -184,6 +184,8 @@
     </Compile>
     <Compile Include="Models\BankAccount.cs" />
     <Compile Include="Models\BankUser.cs" />
+    <Compile Include="Models\Transaction.cs" />
+    <Compile Include="Models\TransactionType.cs" />
     <Compile Include="Models\UserIdentity.cs" />
     <Compile Include="Models\Util\CryptographyUtils.cs" />
     <Compile Include="Models\Util\WebApiUtils.cs" />
@@ -205,6 +207,7 @@
     <Content Include="Views\Registration\Index.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\BankUserDetails\Index.cshtml" />
+    <Content Include="Views\BankUserDetails\History.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

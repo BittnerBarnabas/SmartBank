@@ -9,6 +9,8 @@ namespace SmartBankUi.Models.Util
         public static string HostName { get; set; } = "http://localhost:49848";
         public static string GetUserPath { get; set; } = "/api/users/getuser/";
 
+        public static string GetTransactionsForAccountPath { get; set; } = "/api/transaction/forAccount/";
+
         public static HttpResponseMessage GetFromUrl(string hostname, string url)
         {
             using (var client = new HttpClient())

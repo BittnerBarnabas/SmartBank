@@ -12,6 +12,9 @@
         <th>
             Balance
         </th>
+        <th>
+            Show history
+        </th>
     </tr>
 
     @foreach (var item in Model.BankAccounts)
@@ -22,6 +25,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Balance) HUF
+            </td>
+            <td>
+                @Html.ActionLink("History", "History", new { item.AccountNumber }, null)
             </td>
         </tr>
     }

@@ -1,0 +1,31 @@
+﻿@model Tuple<List<SmartBankUi.Models.Transaction>, int>
+@{
+    ViewBag.Title = "History";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Amount
+        </th>
+    </tr>
+    @foreach (var trans in Model.Item1)
+    {
+        <tr>
+            <td>
+                @trans.TransactionDateTime.Date.ToShortDateString()
+            </td>
+            <td>
+                @if (Model.Item2.Equals(trans.SourceAccountNumber))
+                {
+                    <text>-</text>
+                }@trans.Amount Ft
+            </td>
+        </tr>
+    }
+</table>
+
+<h2>History</h2>
