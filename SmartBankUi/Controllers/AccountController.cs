@@ -1,5 +1,4 @@
 ﻿using System.Net.Http;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Serilog;
 using SmartBankUi.Models;
@@ -25,20 +24,19 @@ namespace SmartBankUi.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Index(BankUser user)
+        public ActionResult Index(BankUser user)
         {
             LOG.Debug("Received user login from : {user}", user);
             var result = WebApiUtils.GetFromUrl(WebApiUtils.HostName, WebApiUtils.GetUserPath + user.Username);
 
-            if (!result.IsSuccessStatusCode)
+            if (!result.IsSuccessStatusCode || !Login(user, result.Content.ReadAsAsync<BankUser>().Result))
             {
+                LOG.Warning("Access denied for user: {user}", user.Username);
                 ModelState.AddModelError(string.Empty, "Username or password is incorrect.");
                 return View();
             }
 
-            var receivedUser = await result.Content.ReadAsAsync<BankUser>();
-            LOG.Debug("Received user : {0}", receivedUser);
-            Login(user, receivedUser);
+            LOG.Debug("Logged in user : {0}", user.Username);
 
             return RedirectToAction("Index", "Home");
         }
@@ -49,18 +47,15 @@ namespace SmartBankUi.Controllers
             return RedirectToAction("Index", "Home");
         }
 
-        private void Login(BankUser user, BankUser receivedUser)
+        private bool Login(BankUser user, BankUser receivedUser)
         {
             if (CryptographyUtils.HaveTheSamePassword(user, receivedUser))
             {
                 _accountControllerService.SignInDefault(UserIdentity.FromBankUser(receivedUser),
                     System.Web.HttpContext.Current);
+                return true;
             }
-            else
-            {
-                LOG.Warning("Access denied for user: {user}", user.Username);
-                ModelState.AddModelError("invalidCredentials", "Username or password is incorrect");
-            }
+            return false;
         }
     }
 }
