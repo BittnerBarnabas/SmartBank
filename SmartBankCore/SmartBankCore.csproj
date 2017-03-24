@@ -125,7 +125,6 @@
     <Compile Include="domain\persistence\repository\IRepository.cs" />
     <Compile Include="domain\persistence\repository\TransactionRepository.cs" />
     <Compile Include="domain\Transaction.cs" />
-    <Compile Include="domain\TransactionType.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

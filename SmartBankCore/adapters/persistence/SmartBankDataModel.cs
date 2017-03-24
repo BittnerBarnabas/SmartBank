@@ -22,11 +22,6 @@ namespace SmartBankCore.adapters.persistence
             // *** TRANSACTIONS *** config
 
             modelBuilder.Entity<Transaction>()
-                .Property(e => e.Type)
-                .IsRequired()
-                .HasColumnName("TRANS_TYPE");
-
-            modelBuilder.Entity<Transaction>()
                 .Property(e => e.Id)
                 .IsRequired()
                 .HasMaxLength(20)
