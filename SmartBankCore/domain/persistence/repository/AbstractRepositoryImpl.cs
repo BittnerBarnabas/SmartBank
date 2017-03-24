@@ -5,7 +5,8 @@ using System.Linq;
 
 namespace SmartBankCore.domain.persistence.repository
 {
-    public class AbstractRepositoryImpl<TEntity, TIdentity> : IRepository<TEntity, TIdentity> where TEntity : class
+    public class AbstractRepositoryImpl<TEntity, TIdentity> :
+        IRepository<TEntity, TIdentity> where TEntity : class
     {
         protected readonly DbContext DbContext;
 
@@ -50,7 +51,8 @@ namespace SmartBankCore.domain.persistence.repository
             return entity;
         }
 
-        public virtual IEnumerable<TS> Save<TS>(IEnumerable<TS> entities) where TS : TEntity
+        public virtual IEnumerable<TS> Save<TS>(IEnumerable<TS> entities)
+            where TS : TEntity
         {
             throw new NotImplementedException();
         }

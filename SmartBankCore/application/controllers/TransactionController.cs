@@ -23,7 +23,9 @@ namespace SmartBankCore.application.controllers
         public List<Transaction> GetRelatedTransactions(int accountNumber)
         {
             LOG.Information("Getting transactions for accout number: {0}", accountNumber);
-            return _transactionRepository.FindTransactionsForAccountNumber(accountNumber).ToList();
+            return
+                _transactionRepository.FindTransactionsForAccountNumber(accountNumber)
+                    .ToList();
         }
     }
 }

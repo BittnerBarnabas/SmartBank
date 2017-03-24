@@ -15,7 +15,8 @@ namespace SmartBankCore.application.startup
 
             config.Formatters.JsonFormatter.SupportedMediaTypes
                 .Add(new MediaTypeHeaderValue("text/html"));
-            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+            config.Formatters.JsonFormatter.SerializerSettings.ReferenceLoopHandling =
+                ReferenceLoopHandling.Ignore;
         }
     }
 }

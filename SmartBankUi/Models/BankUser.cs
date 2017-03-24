@@ -24,7 +24,8 @@ namespace SmartBankUi.Models
         public string Salt { get; set; }
         public int LoginBankAccountNumer { get; set; }
 
-        public ICollection<BankAccount> BankAccounts { get; set; } = new HashSet<BankAccount>();
+        public ICollection<BankAccount> BankAccounts { get; set; } =
+            new HashSet<BankAccount>();
 
         public override string ToString()
         {

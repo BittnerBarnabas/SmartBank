@@ -18,7 +18,8 @@ namespace SmartBankCore
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Trace(
-                    outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] [{SourceContext}] {Message}{NewLine}{Exception}")
+                    outputTemplate:
+                    "{Timestamp:HH:mm:ss} [{Level}] [{SourceContext}] {Message}{NewLine}{Exception}")
                 .CreateLogger();
 
             GlobalConfiguration.Configure(WebApiConfig.Register);
@@ -35,7 +36,8 @@ namespace SmartBankCore
 
             container.Verify();
 
-            GlobalConfiguration.Configuration.DependencyResolver = new SimpleInjectorWebApiDependencyResolver(container);
+            GlobalConfiguration.Configuration.DependencyResolver =
+                new SimpleInjectorWebApiDependencyResolver(container);
         }
     }
 }

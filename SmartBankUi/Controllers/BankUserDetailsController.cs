@@ -16,9 +16,11 @@ namespace SmartBankUi.Controllers
         [Authorize]
         public ActionResult Index()
         {
-            LOG.Debug("Getting bank account list for user: {0}", HttpContext.User.Identity.GetUserId());
-            var result = WebApiUtils.GetFromUrl(WebApiUtils.HostName, WebApiUtils.GetUserPath +
-                                                                      HttpContext.User.Identity.GetUserId());
+            LOG.Debug("Getting bank account list for user: {0}",
+                HttpContext.User.Identity.GetUserId());
+            var result = WebApiUtils.GetFromUrl(WebApiUtils.HostName,
+                WebApiUtils.GetUserPath +
+                HttpContext.User.Identity.GetUserId());
 
             return View(result.Content.ReadAsAsync<BankUser>().Result);
         }
@@ -30,7 +32,8 @@ namespace SmartBankUi.Controllers
             var result = WebApiUtils.GetFromUrl(WebApiUtils.HostName,
                 WebApiUtils.GetTransactionsForAccountPath + accountNumber);
             return View("History",
-                new Tuple<List<Transaction>, int>(result.Content.ReadAsAsync<List<Transaction>>().Result, accountNumber));
+                new Tuple<List<Transaction>, int>(
+                    result.Content.ReadAsAsync<List<Transaction>>().Result, accountNumber));
         }
     }
 }

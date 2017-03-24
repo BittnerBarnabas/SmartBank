@@ -9,6 +9,8 @@ namespace SmartBankCore.domain
         public string Password { get; set; }
         public int Pin { get; set; }
         public string Salt { get; set; }
-        public virtual ICollection<BankAccount> BankAccounts { get; set; } = new HashSet<BankAccount>();
+
+        public virtual ICollection<BankAccount> BankAccounts { get; set; } =
+            new HashSet<BankAccount>();
     }
 }

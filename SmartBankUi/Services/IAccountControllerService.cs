@@ -8,7 +8,8 @@ namespace SmartBankUi.Services
 {
     public interface IAccountControllerService<T> where T : IdentityUser
     {
-        bool SignIn(T userIdentity, Func<T, ICollection<Claim>> claimsProvider, HttpContext httpContext);
+        bool SignIn(T userIdentity, Func<T, ICollection<Claim>> claimsProvider,
+            HttpContext httpContext);
 
         bool SignInDefault(T userIdentity, HttpContext httpContext);
 

@@ -13,7 +13,8 @@ namespace SmartBankUi.Services
     {
         private readonly ILogger LOG = Log.ForContext<AccountControllerServiceImpl>();
 
-        public bool SignIn(UserIdentity userIdentity, Func<UserIdentity, ICollection<Claim>> claimsProvider,
+        public bool SignIn(UserIdentity userIdentity,
+            Func<UserIdentity, ICollection<Claim>> claimsProvider,
             HttpContext httpContext)
         {
             try
@@ -21,13 +22,15 @@ namespace SmartBankUi.Services
                 var identity = new ClaimsIdentity(claimsProvider.Invoke(userIdentity),
                     DefaultAuthenticationTypes.ApplicationCookie);
 
-                httpContext.GetOwinContext().Authentication.SignIn(new AuthenticationProperties
-                {
-                    AllowRefresh = true,
-                    ExpiresUtc = DateTime.UtcNow.AddHours(1)
-                }, identity);
+                httpContext.GetOwinContext()
+                    .Authentication.SignIn(new AuthenticationProperties
+                    {
+                        AllowRefresh = true,
+                        ExpiresUtc = DateTime.UtcNow.AddHours(1)
+                    }, identity);
 
-                LOG.Information("User successfully logged in: {0}, {1}", httpContext.User.Identity.Name,
+                LOG.Information("User successfully logged in: {0}, {1}",
+                    httpContext.User.Identity.Name,
                     httpContext.User.Identity.IsAuthenticated);
                 return true;
             }
@@ -46,7 +49,8 @@ namespace SmartBankUi.Services
         public bool SingOut(HttpContext httpContext)
         {
             LOG.Debug("User: {0} is logged out.", httpContext.User.Identity.Name);
-            httpContext.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            httpContext.GetOwinContext()
+                .Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
             return true;
         }
 

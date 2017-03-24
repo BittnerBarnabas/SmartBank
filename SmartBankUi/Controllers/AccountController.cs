@@ -14,7 +14,8 @@ namespace SmartBankUi.Controllers
         private readonly IAccountControllerService<UserIdentity> _accountControllerService;
         private readonly ILogger LOG = Log.ForContext<AccountController>();
 
-        public AccountController(IAccountControllerService<UserIdentity> accountControllerService)
+        public AccountController(
+            IAccountControllerService<UserIdentity> accountControllerService)
         {
             _accountControllerService = accountControllerService;
         }
@@ -30,6 +31,8 @@ namespace SmartBankUi.Controllers
         {
             LOG.Debug("Received user login from : {user}", user);
 
+            // the received user is incomplete so we need to ignore this property
+            // when validating
             ModelState.Remove("Name");
             if (!ModelState.IsValid)
             {
@@ -37,9 +40,11 @@ namespace SmartBankUi.Controllers
                 return View();
             }
 
-            var result = WebApiUtils.GetFromUrl(WebApiUtils.HostName, WebApiUtils.GetUserPath + user.Username);
+            var result = WebApiUtils.GetFromUrl(WebApiUtils.HostName,
+                WebApiUtils.GetUserPath + user.Username);
 
-            if (!result.IsSuccessStatusCode || !Login(user, result.Content.ReadAsAsync<BankUser>().Result))
+            if (!result.IsSuccessStatusCode ||
+                !Login(user, result.Content.ReadAsAsync<BankUser>().Result))
             {
                 LOG.Warning("Access denied for user: {user}", user.Username);
                 ModelState.AddModelError(string.Empty, "Login details are incorrect.");
@@ -60,16 +65,21 @@ namespace SmartBankUi.Controllers
         private bool Login(BankUser user, BankUser receivedUser)
         {
             if (!CryptographyUtils.HaveTheSamePassword(user, receivedUser) ||
-                !MatchesAccountNumber(user.LoginBankAccountNumer, receivedUser.BankAccounts) ||
+                !MatchesAccountNumber(user.LoginBankAccountNumer,
+                    receivedUser.BankAccounts) ||
                 !user.Pin.Equals(receivedUser.Pin)) return false;
 
-            _accountControllerService.SignInDefault(UserIdentity.FromBankUser(receivedUser),
+            _accountControllerService.SignInDefault(
+                UserIdentity.FromBankUser(receivedUser),
                 System.Web.HttpContext.Current);
 
             return true;
         }
 
-        private static bool MatchesAccountNumber(int accountNumber, IEnumerable<BankAccount> bankAccounts)
-            => bankAccounts.Any(bankAccount => bankAccount.AccountNumber.Equals(accountNumber));
+        private static bool MatchesAccountNumber(int accountNumber,
+            IEnumerable<BankAccount> bankAccounts)
+            =>
+                bankAccounts.Any(
+                    bankAccount => bankAccount.AccountNumber.Equals(accountNumber));
     }
 }

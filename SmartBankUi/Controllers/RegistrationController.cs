@@ -19,7 +19,9 @@ namespace SmartBankUi.Controllers
         {
             if (!ModelState.IsValid)
             {
-                ModelState.AddModelError(string.Empty, "Please fill all fields with the required information.");
+                LOG.Warning("Model-state is not valid for {user}", user);
+                ModelState.AddModelError(string.Empty,
+                    "Please fill all fields with the required information.");
                 return View();
             }
             var passwordAndSalt = CryptographyUtils.GenerateHashAndSalt(user.Password);

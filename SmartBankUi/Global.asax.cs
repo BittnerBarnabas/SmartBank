@@ -18,7 +18,8 @@ namespace SmartBankUi
             Log.Logger = new LoggerConfiguration()
                 .MinimumLevel.Debug()
                 .WriteTo.Trace(
-                    outputTemplate: "{Timestamp:HH:mm:ss} [{Level}] [{SourceContext}] {Message}{NewLine}{Exception}")
+                    outputTemplate:
+                    "{Timestamp:HH:mm:ss} [{Level}] [{SourceContext}] {Message}{NewLine}{Exception}")
                 .CreateLogger();
             var LOG = Log.ForContext<MvcApplication>();
 
@@ -32,7 +33,10 @@ namespace SmartBankUi
             container.Options.DefaultScopedLifestyle = new WebRequestLifestyle();
 
             LOG.Information("Registering dependencies");
-            container.Register<IAccountControllerService<UserIdentity>, AccountControllerServiceImpl>(Lifestyle.Scoped);
+            container
+                .Register
+                <IAccountControllerService<UserIdentity>, AccountControllerServiceImpl>(
+                    Lifestyle.Scoped);
 
             container.RegisterMvcControllers(Assembly.GetExecutingAssembly());
 
