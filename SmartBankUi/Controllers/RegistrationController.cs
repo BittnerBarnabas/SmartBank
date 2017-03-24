@@ -17,6 +17,11 @@ namespace SmartBankUi.Controllers
         [HttpPost]
         public ActionResult Index(BankUser user)
         {
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(string.Empty, "Please fill all fields with the required information.");
+                return View();
+            }
             var passwordAndSalt = CryptographyUtils.GenerateHashAndSalt(user.Password);
             user.Password = passwordAndSalt.Item1;
             user.Salt = passwordAndSalt.Item2;

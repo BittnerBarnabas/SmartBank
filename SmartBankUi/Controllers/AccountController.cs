@@ -29,12 +29,20 @@ namespace SmartBankUi.Controllers
         public ActionResult Index(BankUser user)
         {
             LOG.Debug("Received user login from : {user}", user);
+
+            ModelState.Remove("Name");
+            if (!ModelState.IsValid)
+            {
+                ModelState.AddModelError(string.Empty, "Please fill all the fields.");
+                return View();
+            }
+
             var result = WebApiUtils.GetFromUrl(WebApiUtils.HostName, WebApiUtils.GetUserPath + user.Username);
 
             if (!result.IsSuccessStatusCode || !Login(user, result.Content.ReadAsAsync<BankUser>().Result))
             {
                 LOG.Warning("Access denied for user: {user}", user.Username);
-                ModelState.AddModelError(string.Empty, "Login detauls are incorrect.");
+                ModelState.AddModelError(string.Empty, "Login details are incorrect.");
                 return View();
             }
 
