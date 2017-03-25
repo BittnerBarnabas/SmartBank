@@ -10,5 +10,11 @@ namespace SmartBankCore.domain
         public DateTime CreatedDate { get; set; }
         public virtual BankUser BankUser { get; set; }
         public bool IsLocked { get; set; }
+
+        public override string ToString()
+        {
+            return
+                $"{nameof(AccountNumber)}: {AccountNumber}, {nameof(Owner)}: {Owner}, {nameof(Balance)}: {Balance}, {nameof(CreatedDate)}: {CreatedDate}, {nameof(BankUser)}: {BankUser}, {nameof(IsLocked)}: {IsLocked}";
+        }
     }
 }

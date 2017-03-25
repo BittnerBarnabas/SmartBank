@@ -22,6 +22,7 @@
                 @if (HttpContext.Current.User.Identity.IsAuthenticated)
             {
                     @Html.ActionLink("Details", "Index", "BankUserDetails", new { area = "" }, new { @class = "navbar-brand" })
+                    @Html.ActionLink("New Transaction", "Index", "Transaction", new { area = "" }, new { @class = "navbar-brand" })
                     @Html.ActionLink("Log Out", "Logout", "Account", new { area = "" }, new { @class = "navbar-brand" })
                 }
                 else

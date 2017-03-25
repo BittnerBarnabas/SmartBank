@@ -1,7 +1,25 @@
-﻿
+﻿@model ICollection<SmartBankUi.Models.BankAccount>
 @{
     ViewBag.Title = "TransactionPage";
 }
 
-<h2>TransactionPage</h2>
-
+<h2>Transactions</h2>
+<h3>Available accounts for transactions</h3>
+<table>
+    <tr>
+        <th>Account number</th>
+        <th>Options</th>
+    </tr>
+    @foreach (var account in Model)
+    {
+        if (!account.IsLocked)
+        {
+            <tr>
+                <td>@account.AccountNumber</td>
+                <td>
+                    @Html.ActionLink("Start transfer", "NewTransaction", new { account.AccountNumber })
+                </td>
+            </tr>
+        }
+    }
+</table>

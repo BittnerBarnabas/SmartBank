@@ -12,5 +12,11 @@ namespace SmartBankCore.domain
 
         public virtual ICollection<BankAccount> BankAccounts { get; set; } =
             new HashSet<BankAccount>();
+
+        public override string ToString()
+        {
+            return
+                $"{nameof(Username)}: {Username}, {nameof(Name)}: {Name}, {nameof(Password)}: {Password}, {nameof(Pin)}: {Pin}, {nameof(Salt)}: {Salt}, {nameof(BankAccounts)}: {BankAccounts}";
+        }
     }
 }
