@@ -31,9 +31,14 @@ namespace SmartBankUi.Controllers
             LOG.Debug("Getting transaction list for accont number: {0}", accountNumber);
             var result = WebApiUtils.GetFromUrl(WebApiUtils.HostName,
                 WebApiUtils.GetTransactionsForAccountPath + accountNumber);
+
+            var transactionList =
+                result.Content.ReadAsAsync<List<Transaction>>().Result;
+            transactionList.Sort(
+                (t1, t2) => t2.TransactionDateTime.CompareTo(t1.TransactionDateTime));
+
             return View("History",
-                new Tuple<List<Transaction>, int>(
-                    result.Content.ReadAsAsync<List<Transaction>>().Result, accountNumber));
+                new Tuple<List<Transaction>, int>(transactionList, accountNumber));
         }
     }
 }

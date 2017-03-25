@@ -3,10 +3,18 @@
     ViewBag.Title = "History";
 }
 
+<h2>Transaction history for account: @Model.Item2</h2>
+
 <table class="table">
     <tr>
         <th>
-            Date
+            Transaction Date
+        </th>
+        <th>
+            Source Account
+        </th>
+        <th>
+            Destination Account
         </th>
         <th>
             Amount
@@ -19,6 +27,20 @@
                 @trans.TransactionDateTime.Date.ToShortDateString()
             </td>
             <td>
+                @trans.SourceAccountNumber
+                @if (Model.Item2.Equals(trans.SourceAccountNumber))
+                {
+                    <text>(yours)</text>
+                }
+            </td>
+            <td>
+                @trans.RecipientAccountNumber
+                @if (Model.Item2.Equals(trans.RecipientAccountNumber))
+                {
+                    <text>(yours)</text>
+                }
+            </td>
+            <td>
                 @if (Model.Item2.Equals(trans.SourceAccountNumber))
                 {
                     <text>-</text>
@@ -27,5 +49,3 @@
         </tr>
     }
 </table>
-
-<h2>History</h2>

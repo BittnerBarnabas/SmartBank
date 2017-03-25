@@ -14,7 +14,6 @@ namespace SmartBankCore.adapters.persistence
 
         public virtual DbSet<BankAccount> BANK_ACCOUNTS { get; set; }
         public virtual DbSet<BankUser> BANK_USERS { get; set; }
-
         public virtual DbSet<Transaction> Transactions { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
@@ -83,6 +82,10 @@ namespace SmartBankCore.adapters.persistence
                 .IsRequired()
                 .HasColumnName("ACCOUNT_NUMBER")
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+
+            modelBuilder.Entity<BankAccount>()
+                .Property(e => e.IsLocked)
+                .HasColumnName("LOCKED");
 
             modelBuilder.Entity<BankAccount>()
                 .ToTable("BANK_ACCOUNT")

@@ -9,5 +9,6 @@ namespace SmartBankCore.domain
         public int Balance { get; set; }
         public DateTime CreatedDate { get; set; }
         public virtual BankUser BankUser { get; set; }
+        public bool IsLocked { get; set; }
     }
 }

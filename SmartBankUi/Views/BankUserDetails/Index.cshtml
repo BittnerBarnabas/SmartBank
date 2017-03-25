@@ -27,7 +27,14 @@
                 @Html.DisplayFor(modelItem => item.Balance) Ft
             </td>
             <td>
-                @Html.ActionLink("History", "History", new { item.AccountNumber }, null)
+                @if (item.IsLocked)
+                {
+                    <text>Account is locked</text>
+                }
+                else
+                {
+                    @Html.ActionLink("Account history", "History", new { item.AccountNumber }, null)
+                }
             </td>
         </tr>
     }
