@@ -2,7 +2,7 @@
 
 namespace SmartBankCore.domain.persistence.repository
 {
-    public class BankAccountRepository : AbstractRepositoryImpl<BankAccount, string>
+    public class BankAccountRepository : AbstractRepositoryImpl<BankAccount, int>
     {
         public BankAccountRepository(DbContext dbContext) : base(dbContext)
         {

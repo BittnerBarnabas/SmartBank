@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 
 namespace SmartBankCore.domain.persistence.repository
@@ -47,7 +48,7 @@ namespace SmartBankCore.domain.persistence.repository
 
         public virtual TS Save<TS>(TS entity) where TS : TEntity
         {
-            DbContext.Set<TEntity>().Add(entity);
+            DbContext.Set<TEntity>().AddOrUpdate(entity);
             return entity;
         }
 
