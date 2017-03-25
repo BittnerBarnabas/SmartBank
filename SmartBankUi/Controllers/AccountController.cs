@@ -23,7 +23,7 @@ namespace SmartBankUi.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            return View("LogInPage");
         }
 
         [HttpPost]

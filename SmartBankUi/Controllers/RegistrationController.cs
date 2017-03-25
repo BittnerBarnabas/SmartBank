@@ -11,7 +11,7 @@ namespace SmartBankUi.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            return View("RegistrationPage");
         }
 
         [HttpPost]
@@ -22,7 +22,7 @@ namespace SmartBankUi.Controllers
                 LOG.Warning("Model-state is not valid for {user}", user);
                 ModelState.AddModelError(string.Empty,
                     "Please fill all fields with the required information.");
-                return View();
+                return View("RegistrationPage");
             }
             var passwordAndSalt = CryptographyUtils.GenerateHashAndSalt(user.Password);
             user.Password = passwordAndSalt.Item1;
@@ -44,7 +44,7 @@ namespace SmartBankUi.Controllers
                 LOG.Debug("The error was: {0}", result.Content.ReadAsStringAsync().Result);
             }
 
-            return Index();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -22,7 +22,7 @@ namespace SmartBankUi.Controllers
                 WebApiUtils.GetUserPath +
                 HttpContext.User.Identity.GetUserId());
 
-            return View(result.Content.ReadAsAsync<BankUser>().Result);
+            return View("AccountsPage", result.Content.ReadAsAsync<BankUser>().Result);
         }
 
         [Authorize]
