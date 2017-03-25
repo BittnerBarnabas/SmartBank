@@ -33,7 +33,7 @@ namespace SmartBankCore.application.controllers
 
         [HttpPost]
         [Route("putTransaction")]
-        public void ExecuteTranasction(Transaction pendingTransaction)
+        public IHttpActionResult ExecuteTranasction(Transaction pendingTransaction)
         {
             LOG.Information("Starting to execute tranasction: {0}", pendingTransaction);
 
@@ -44,7 +44,17 @@ namespace SmartBankCore.application.controllers
             if (sourceBankAccount != null)
             {
                 LOG.Information("The source account is an internal account");
-                //TODO check if the user has the available balance
+                if (sourceBankAccount.IsLocked)
+                {
+                    LOG.Error("Source account is locked");
+                    return BadRequest("Source account is locked.");
+                }
+                if (sourceBankAccount.Balance < pendingTransaction.Amount)
+                {
+                    LOG.Error(
+                        "Source account insufficient balance to compete transaction.");
+                    return BadRequest("Insufficient balance to complete transaction");
+                }
                 sourceBankAccount.Balance -= pendingTransaction.Amount;
                 _bankAccountRepository.Save(sourceBankAccount);
             }
@@ -63,6 +73,8 @@ namespace SmartBankCore.application.controllers
             _transactionRepository.Save(pendingTransaction);
             _transactionRepository.Commit();
             _bankAccountRepository.Commit();
+            LOG.Information("Transaction completed successfully.");
+            return Ok();
         }
     }
 }
