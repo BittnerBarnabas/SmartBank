@@ -4,7 +4,7 @@ using System.Net.Http.Formatting;
 
 namespace SmartBankUi.Models.Util
 {
-    public class WebApiUtils
+    public static class WebApiUtils
     {
         public static string HostName { get; set; } = "http://localhost:49848";
         public static string GetUserPath { get; set; } = "/api/users/getuser/";

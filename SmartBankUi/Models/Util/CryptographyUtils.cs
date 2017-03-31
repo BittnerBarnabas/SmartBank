@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace SmartBankUi.Models.Util
 {
-    public class CryptographyUtils
+    public static class CryptographyUtils
     {
         public static Tuple<string, string> GenerateHashAndSalt(string password)
         {
