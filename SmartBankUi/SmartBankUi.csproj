@@ -189,6 +189,7 @@
     <Compile Include="Models\TransactionType.cs" />
     <Compile Include="Models\UserIdentity.cs" />
     <Compile Include="Models\Util\CryptographyUtils.cs" />
+    <Compile Include="Models\Util\PrincipalExtension.cs" />
     <Compile Include="Models\Util\WebApiUtils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AccountControllerServiceImpl.cs" />

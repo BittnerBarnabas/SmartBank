@@ -26,7 +26,7 @@ namespace SmartBankUi.Services
                     .Authentication.SignIn(new AuthenticationProperties
                     {
                         AllowRefresh = true,
-                        ExpiresUtc = DateTime.UtcNow.AddSeconds(5)
+                        ExpiresUtc = DateTime.UtcNow.AddMinutes(20)
                     }, identity);
 
                 LOG.Information("User successfully logged in: {0}, {1}",

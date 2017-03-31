@@ -21,7 +21,7 @@ namespace SmartBankUi.Controllers
             var result = WebApiUtils.GetFromUrl(WebApiUtils.HostName,
                 WebApiUtils.GetUserPath +
                 HttpContext.User.Identity.GetUserId());
-
+            var secure = HttpContext.User.IsSecureMode();
             return View("AccountsPage", result.Content.ReadAsAsync<BankUser>().Result);
         }
 

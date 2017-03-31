@@ -26,6 +26,15 @@ namespace SmartBankUi.Controllers
             return View("LogInPage");
         }
 
+        /// <summary>
+        /// Login method which is called if the user on the log-in page pressed
+        /// log-in button
+        /// </summary>
+        /// <param name="user">The user who should be logged in.</param>
+        /// <returns>
+        /// Redirects to the homepage if login was successful otherwise back to
+        /// the log-in page
+        /// </returns>
         [HttpPost]
         public ActionResult Index(BankUser user)
         {
@@ -51,7 +60,8 @@ namespace SmartBankUi.Controllers
                 return View();
             }
 
-            LOG.Debug("Logged in user : {0}", user.Username);
+            LOG.Debug("Logged in user: {0} secure mode: {1}", user.Username,
+                user.IsSecureLogin);
 
             return RedirectToAction("Index", "Home");
         }
@@ -68,6 +78,8 @@ namespace SmartBankUi.Controllers
                 !MatchesAccountNumber(user.LoginBankAccountNumer,
                     receivedUser.BankAccounts) ||
                 !user.Pin.Equals(receivedUser.Pin)) return false;
+
+            receivedUser.IsSecureLogin = user.IsSecureLogin;
 
             _accountControllerService.SignInDefault(
                 UserIdentity.FromBankUser(receivedUser),
