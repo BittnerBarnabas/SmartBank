@@ -26,7 +26,7 @@ namespace SmartBankUi.Services
                     .Authentication.SignIn(new AuthenticationProperties
                     {
                         AllowRefresh = true,
-                        ExpiresUtc = DateTime.UtcNow.AddHours(1)
+                        ExpiresUtc = DateTime.UtcNow.AddSeconds(5)
                     }, identity);
 
                 LOG.Information("User successfully logged in: {0}, {1}",
@@ -59,7 +59,8 @@ namespace SmartBankUi.Services
             return new List<Claim>
             {
                 new Claim(ClaimTypes.Name, userIdentity.Name),
-                new Claim(ClaimTypes.NameIdentifier, userIdentity.UserName)
+                new Claim(ClaimTypes.NameIdentifier, userIdentity.UserName),
+                new Claim("SecureMode", userIdentity.SecureMode.ToString())
             };
         }
     }

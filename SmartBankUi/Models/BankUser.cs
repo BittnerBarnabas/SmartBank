@@ -27,6 +27,8 @@ namespace SmartBankUi.Models
         public ICollection<BankAccount> BankAccounts { get; set; } =
             new HashSet<BankAccount>();
 
+        public bool IsSecureLogin { get; set; }
+
         public override string ToString()
         {
             return

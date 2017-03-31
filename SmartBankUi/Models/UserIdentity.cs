@@ -11,9 +11,16 @@ namespace SmartBankUi.Models
         public string UserName { get; set; }
         public string Name { get; set; }
 
+        public bool SecureMode { get; set; }
+
         public static UserIdentity FromBankUser(BankUser user)
         {
-            return new UserIdentity { Name = user.Name, UserName = user.Username };
+            return new UserIdentity
+            {
+                Name = user.Name,
+                UserName = user.Username,
+                SecureMode = user.IsSecureLogin
+            };
         }
     }
 }
