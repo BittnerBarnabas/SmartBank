@@ -36,9 +36,15 @@ namespace SmartBankUi.Models.Util
 
         public static bool HaveTheSamePassword(BankUser newUser, BankUser originalUser)
         {
+            return HaveTheSamePassword(originalUser.Password, newUser.Password,
+                originalUser.Salt);
+        }
+
+        public static bool HaveTheSamePassword(string originalPassword, string newPassword,
+            string salt)
+        {
             return
-                Hash(newUser.Password, Convert.FromBase64String(originalUser.Salt))
-                    .Equals(originalUser.Password);
+                Hash(newPassword, Convert.FromBase64String(salt)).Equals(originalPassword);
         }
     }
 }

@@ -16,12 +16,20 @@ namespace SmartBankUi.Controllers
         [Authorize]
         public ActionResult Index()
         {
+            if (HttpContext.User.IsSecureMode())
+            {
+                
+                var asd = RedirectToAction("Index", "SecureMode");
+                if (asd == null)
+                    LOG.Information("Password is ok.");
+                else
+                    LOG.Information("Not ok");
+            }
             LOG.Debug("Getting bank account list for user: {0}",
                 HttpContext.User.Identity.GetUserId());
             var result = WebApiUtils.GetFromUrl(WebApiUtils.HostName,
                 WebApiUtils.GetUserPath +
                 HttpContext.User.Identity.GetUserId());
-            var secure = HttpContext.User.IsSecureMode();
             return View("AccountsPage", result.Content.ReadAsAsync<BankUser>().Result);
         }
 

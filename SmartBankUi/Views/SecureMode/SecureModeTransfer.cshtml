@@ -1,0 +1,32 @@
+﻿@model SmartBankUi.Models.Util.SecureModeTransferObject
+@{
+    ViewBag.Title = "SecureModeTransfer";
+}
+
+<h2>Enter password to complete action</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>BankUser</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.Label("Password:", new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+
+        @Html.HiddenFor(model => model.ActionName, new { Value = Model.ActionName })
+        @Html.HiddenFor(model => model.ControllerName, new { Value = Model.ControllerName })
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" formaction="@Url.Action("RedirectToPage")" />
+            </div>
+        </div>
+    </div>
+}
