@@ -11,10 +11,14 @@ namespace SmartBankCore.application.controllers
     public class TransactionController : ApiController
     {
         private readonly BankAccountRepository _bankAccountRepository;
-        private readonly TransactionRepository _transactionRepository;
+
+        private readonly ITransactionRepository<Transaction, string>
+            _transactionRepository;
+
         private readonly ILogger LOG = Log.ForContext<TransactionController>();
 
-        public TransactionController(TransactionRepository transactionRepository,
+        public TransactionController(
+            ITransactionRepository<Transaction, string> transactionRepository,
             BankAccountRepository bankAccountRepository)
         {
             _transactionRepository = transactionRepository;

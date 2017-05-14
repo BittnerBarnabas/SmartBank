@@ -9,10 +9,10 @@ namespace SmartBankCore.application.controllers
     [RoutePrefix("api/users")]
     public class BankUsersController : ApiController
     {
-        private readonly BankUserRepository _repository;
+        private readonly IRepository<BankUser, string> _repository;
         private readonly ILogger LOG = Log.ForContext<BankUsersController>();
 
-        public BankUsersController(BankUserRepository repository)
+        public BankUsersController(IRepository<BankUser, string> repository)
         {
             _repository = repository;
         }

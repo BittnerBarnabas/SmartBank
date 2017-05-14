@@ -29,7 +29,9 @@ namespace SmartBankCore
 
             container.Register<IRepository<BankUser, string>, BankUserRepository>();
             container.Register<IRepository<BankAccount, int>, BankAccountRepository>();
-            container.Register<IRepository<Transaction, string>, TransactionRepository>();
+            container
+                .Register
+                <ITransactionRepository<Transaction, string>, TransactionRepository>();
             container.Register<DbContext, SmartBankDataModel>(Lifestyle.Scoped);
 
             container.RegisterWebApiControllers(GlobalConfiguration.Configuration);

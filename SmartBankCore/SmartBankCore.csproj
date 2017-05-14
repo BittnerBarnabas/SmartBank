@@ -123,6 +123,7 @@
     <Compile Include="domain\persistence\repository\BankAccountRepository.cs" />
     <Compile Include="domain\persistence\repository\BankUserRepository.cs" />
     <Compile Include="domain\persistence\repository\IRepository.cs" />
+    <Compile Include="domain\persistence\repository\ITransactionRepository.cs" />
     <Compile Include="domain\persistence\repository\TransactionRepository.cs" />
     <Compile Include="domain\Transaction.cs" />
     <Compile Include="Global.asax.cs">

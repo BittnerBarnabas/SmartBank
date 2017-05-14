@@ -2,7 +2,7 @@
 
 namespace SmartBankCore.domain.persistence.repository
 {
-    internal interface IRepository<TEntity, in TId> where TEntity : class
+    public interface IRepository<TEntity, in TId> where TEntity : class
     {
         TEntity FindById(TId id);
 
@@ -19,5 +19,7 @@ namespace SmartBankCore.domain.persistence.repository
         TS Save<TS>(TS entity) where TS : TEntity;
 
         IEnumerable<TS> Save<TS>(IEnumerable<TS> entities) where TS : TEntity;
+
+        void Commit();
     }
 }

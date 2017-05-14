@@ -4,7 +4,8 @@ using System.Linq;
 
 namespace SmartBankCore.domain.persistence.repository
 {
-    public class TransactionRepository : AbstractRepositoryImpl<Transaction, string>
+    public class TransactionRepository : AbstractRepositoryImpl<Transaction, string>,
+        ITransactionRepository<Transaction, string>
     {
         public TransactionRepository(DbContext dbContext) : base(dbContext)
         {
