@@ -1,0 +1,19 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage{color}
+\usepackage[pdftex]{graphicx}
+\usepackage{setspace}
+\usepackage[nottoc, numbib]{tocbibind}
+\usepackage[document]{ragged2e}
+\usepackage{hyperref}
+
+
+\begin{document}
+\title{Webes alkalmazasásfejlesztés I. beadandó}
+\maketitle
+\tableofcontents
+\pagebreak
+\section{Befezetés}
+
+\end{document}

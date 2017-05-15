@@ -1,0 +1,8 @@
+\contentsline {section}{\numberline {1}Feladat}{3}{section.1}
+\contentsline {section}{\numberline {2}Felhaszn\IeC {\'a}l\IeC {\'o}i dokument\IeC {\'a}ci\IeC {\'o}}{4}{section.2}
+\contentsline {subsection}{\numberline {2.1}Felhaszn\IeC {\'a}l\IeC {\'o}i esetek}{4}{subsection.2.1}
+\contentsline {section}{\numberline {3}Fejleszt\IeC {\H o}i dokument\IeC {\'a}ci\IeC {\'o}}{4}{section.3}
+\contentsline {subsection}{\numberline {3.1}Core}{5}{subsection.3.1}
+\contentsline {subsection}{\numberline {3.2}UI}{5}{subsection.3.2}
+\contentsline {subsection}{\numberline {3.3}Adatb\IeC {\'a}zis}{6}{subsection.3.3}
+\contentsline {section}{\numberline {4}Tesztel\IeC {\'e}s}{7}{section.4}

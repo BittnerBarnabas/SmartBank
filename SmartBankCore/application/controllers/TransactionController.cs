@@ -10,7 +10,7 @@ namespace SmartBankCore.application.controllers
     [RoutePrefix("api/transaction")]
     public class TransactionController : ApiController
     {
-        private readonly BankAccountRepository _bankAccountRepository;
+        private readonly IRepository<BankAccount, int> _bankAccountRepository;
 
         private readonly ITransactionRepository<Transaction, string>
             _transactionRepository;
@@ -19,7 +19,7 @@ namespace SmartBankCore.application.controllers
 
         public TransactionController(
             ITransactionRepository<Transaction, string> transactionRepository,
-            BankAccountRepository bankAccountRepository)
+            IRepository<BankAccount, int> bankAccountRepository)
         {
             _transactionRepository = transactionRepository;
             _bankAccountRepository = bankAccountRepository;
