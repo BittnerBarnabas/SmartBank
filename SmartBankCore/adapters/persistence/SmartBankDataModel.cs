@@ -15,6 +15,7 @@ namespace SmartBankCore.adapters.persistence
         public virtual DbSet<BankAccount> BANK_ACCOUNTS { get; set; }
         public virtual DbSet<BankUser> BANK_USERS { get; set; }
         public virtual DbSet<Transaction> Transactions { get; set; }
+        public virtual DbSet<BankEmployee> BANK_EMPLOYEES { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -129,6 +130,26 @@ namespace SmartBankCore.adapters.persistence
                 .WithRequired(e => e.BankUser)
                 .HasForeignKey(e => e.Owner)
                 .WillCascadeOnDelete(true);
+
+            // *** BANK_EMPLOYEES ***
+            modelBuilder.Entity<BankEmployee>()
+                .Property(e => e.Salt)
+                .HasMaxLength(32)
+                .IsRequired();
+
+            modelBuilder.Entity<BankEmployee>()
+                .Property(e => e.Password)
+                .HasMaxLength(128)
+                .IsRequired();
+
+            modelBuilder.Entity<BankEmployee>()
+                .Property(e => e.UserName)
+                .HasMaxLength(128)
+                .IsRequired();
+
+            modelBuilder.Entity<BankEmployee>()
+                .ToTable("BANK_EMPLOYEES")
+                .HasKey(e => e.UserName);
         }
     }
 }

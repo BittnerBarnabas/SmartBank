@@ -113,14 +113,17 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="application\controllers\BankEmployeeController.cs" />
     <Compile Include="application\controllers\TransactionController.cs" />
     <Compile Include="domain\BankAccount.cs" />
+    <Compile Include="domain\BankEmployee.cs" />
     <Compile Include="domain\BankUser.cs" />
     <Compile Include="adapters\persistence\SmartBankDataModel.cs" />
     <Compile Include="application\startup\WebApiConfig.cs" />
     <Compile Include="application\controllers\BankUsersController.cs" />
     <Compile Include="domain\persistence\repository\AbstractRepositoryImpl.cs" />
     <Compile Include="domain\persistence\repository\BankAccountRepository.cs" />
+    <Compile Include="domain\persistence\repository\BankEmployeeRepository.cs" />
     <Compile Include="domain\persistence\repository\BankUserRepository.cs" />
     <Compile Include="domain\persistence\repository\IRepository.cs" />
     <Compile Include="domain\persistence\repository\ITransactionRepository.cs" />
