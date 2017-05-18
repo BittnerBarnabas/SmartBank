@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using Serilog;
 using SmartBankDesktop.Model.Utils;
 
@@ -7,6 +8,8 @@ namespace SmartBankDesktop.Model
     internal class LoginModel
     {
         private readonly ILogger LOG = Log.ForContext<LoginModel>();
+
+        public event Action<BankEmployee, bool> LoginAttemptEvent;
 
         public void LogIn(string userName, string password)
         {
@@ -17,10 +20,11 @@ namespace SmartBankDesktop.Model
                 var employee = result.Content.ReadAsAsync<BankEmployee>().Result;
                 LOG.Debug("Call returned with : {employee}", employee);
                 if (CryptographyUtils.HaveTheSamePassword(
-                    new BankEmployee { Password = password }, employee))
-                {
-                }
+                    new BankEmployee { Password = password, Salt = employee.Salt }, employee))
+                    LoginAttemptEvent?.Invoke(employee, true);
             }
+            LoginAttemptEvent?.Invoke(
+                new BankEmployee { UserName = userName, Password = password }, false);
         }
     }
 }

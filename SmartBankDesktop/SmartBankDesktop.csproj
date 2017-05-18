@@ -84,6 +84,7 @@
     </Compile>
     <Compile Include="Controller\IController.cs" />
     <Compile Include="Controller\LoginController.cs" />
+    <Compile Include="Controller\MainWindowController.cs" />
     <Compile Include="Model\BankEmployee.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\Utils\CryptographyUtils.cs" />

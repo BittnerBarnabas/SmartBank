@@ -12,7 +12,7 @@ namespace SmartBankDesktop
     public partial class App
     {
         private LoginController _loginController;
-        private MainWindow _mainWindow;
+        private MainWindowController _mainWindowController;
 
         private void App_OnStartup(object sender, StartupEventArgs e)
         {
@@ -24,6 +24,15 @@ namespace SmartBankDesktop
                 .CreateLogger();
 
             _loginController = new LoginController(new LoginWindow(), new LoginModel());
+            _mainWindowController = new MainWindowController(new MainWindow());
+
+            _loginController.SuccesfulLoginAttempt +=
+                isSuccess =>
+                {
+                    if (isSuccess)
+                        _mainWindowController.ShowView();
+                };
+
             _loginController.ShowView();
         }
     }

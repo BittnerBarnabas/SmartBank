@@ -11,12 +11,14 @@ namespace SmartBankDesktop.View
         public LoginWindow()
         {
             InitializeComponent();
+            errorLabel.Visibility = Visibility.Hidden;
         }
 
         public event Action<string, string> LogInButtonClickedEvent;
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            errorLabel.Visibility = Visibility.Hidden;
             LogInButtonClickedEvent?.Invoke(UserNameTextBox.Text, PasswordTextBox.Text);
         }
     }
