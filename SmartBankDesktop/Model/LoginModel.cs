@@ -23,8 +23,11 @@ namespace SmartBankDesktop.Model
                     new BankEmployee { Password = password, Salt = employee.Salt }, employee))
                     LoginAttemptEvent?.Invoke(employee, true);
             }
-            LoginAttemptEvent?.Invoke(
-                new BankEmployee { UserName = userName, Password = password }, false);
+            else
+            {
+                LoginAttemptEvent?.Invoke(
+                    new BankEmployee { UserName = userName, Password = password }, false);
+            }
         }
     }
 }

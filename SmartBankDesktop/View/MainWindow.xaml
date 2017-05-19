@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="300" Width="300">
     <Grid>
-        
+        <Label Content="Logged in as: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
+        <Label x:Name="UserNameLabel" Content="{Binding LoggedInUserName}" HorizontalAlignment="Left"
+               Margin="94,10,0,0" VerticalAlignment="Top" Height="26" Width="82" />
+        <ComboBox HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" Width="84" />
     </Grid>
 </Window>

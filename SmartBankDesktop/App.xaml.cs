@@ -24,14 +24,18 @@ namespace SmartBankDesktop
                 .CreateLogger();
 
             _loginController = new LoginController(new LoginWindow(), new LoginModel());
-            _mainWindowController = new MainWindowController(new MainWindow());
+            var mainModel = new MainModel();
+            _mainWindowController = new MainWindowController(new MainWindow(),
+                mainModel);
 
-            _loginController.SuccesfulLoginAttempt +=
-                isSuccess =>
+            _loginController.SuccesfulLoginAttempt += (userName, isSuccesful) =>
+            {
+                if (isSuccesful)
                 {
-                    if (isSuccess)
-                        _mainWindowController.ShowView();
-                };
+                    _mainWindowController.LoggedInUserName = userName;
+                    _mainWindowController.ShowView();
+                }
+            };
 
             _loginController.ShowView();
         }

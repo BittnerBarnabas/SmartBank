@@ -27,7 +27,7 @@ namespace SmartBankDesktop.Controller
                     LOG.Information("Succesful login with username: {userName}",
                         employee.UserName);
                     _loginWindow.Close();
-                    SuccesfulLoginAttempt?.Invoke(true);
+                    SuccesfulLoginAttempt?.Invoke(employee.UserName, true);
                 }
                 else
                 {
@@ -36,7 +36,7 @@ namespace SmartBankDesktop.Controller
                     _loginWindow.PasswordTextBox.Clear();
                     _loginWindow.UserNameTextBox.Clear();
                     _loginWindow.errorLabel.Visibility = Visibility.Visible;
-                    SuccesfulLoginAttempt?.Invoke(false);
+                    SuccesfulLoginAttempt?.Invoke(employee.UserName, false);
                 }
             };
         }
@@ -46,6 +46,6 @@ namespace SmartBankDesktop.Controller
             _loginWindow.Show();
         }
 
-        public event Action<bool> SuccesfulLoginAttempt;
+        public event Action<string, bool> SuccesfulLoginAttempt;
     }
 }

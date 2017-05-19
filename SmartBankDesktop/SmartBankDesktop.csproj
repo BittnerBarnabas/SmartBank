@@ -82,13 +82,16 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Controller\AbstractController.cs" />
     <Compile Include="Controller\IController.cs" />
     <Compile Include="Controller\LoginController.cs" />
     <Compile Include="Controller\MainWindowController.cs" />
     <Compile Include="Model\BankEmployee.cs" />
     <Compile Include="Model\LoginModel.cs" />
+    <Compile Include="Model\MainModel.cs" />
     <Compile Include="Model\Utils\CryptographyUtils.cs" />
     <Compile Include="Model\Utils\WebApiUtils.cs" />
+    <Compile Include="Properties\Annotations.cs" />
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
