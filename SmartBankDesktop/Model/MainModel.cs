@@ -24,5 +24,17 @@ namespace SmartBankDesktop.Model
                 BankUsers = response.Content.ReadAsAsync<IEnumerable<BankUser>>().Result;
             }
         }
+
+        public void ExecuteTransaction(Transaction transaction)
+        {
+            WebApiUtils.PostToUrl(
+                Settings.Default.SmartBankPutTransactionPath, transaction);
+        }
+
+        public void ToggleLockForAccountNumber(int id)
+        {
+            LOG.Information("Sending action to toggle lock for account {id}", id);
+            WebApiUtils.PostToUrl(Settings.Default.SmartBankToggleAccountLockPath, id);
+        }
     }
 }

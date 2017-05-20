@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SmartBankDesktop.View"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="300">
-    <Grid>
+        Title="MainWindow" Height="300" Width="681">
+    <Grid Margin="0,0,-292,-1">
         <Label Content="Logged in as: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
         <Label x:Name="UserNameLabel" Content="{Binding LoggedInUserName}" HorizontalAlignment="Left"
                Margin="94,10,0,0" VerticalAlignment="Top" Height="26" Width="82" />
@@ -17,13 +17,31 @@
                           VerticalAlignment="Top" Width="142"
                           ItemsSource="{Binding BankUsers}" DisplayMemberPath="Name"
                           SelectionChanged="UserNameComboBoxSelectionChanged" />
-                <ComboBox HorizontalAlignment="Left" Margin="99,42,0,0" VerticalAlignment="Top" Width="142"
+                <ComboBox x:Name="AccountSelectorComboBox" HorizontalAlignment="Left" Margin="99,42,0,0" VerticalAlignment="Top" Width="142"
                           ItemsSource="{Binding SelectedUser.BankAccounts}" DisplayMemberPath="AccountNumber" />
                 <Button Content="Select" HorizontalAlignment="Left" Margin="166,81,0,0" VerticalAlignment="Top"
-                        Width="75" Click="Button_Click" />
+                        Width="75" Click="AccountSelectionButtonClick" />
                 <Label Content="Username:" HorizontalAlignment="Left" Margin="15,7,0,0" VerticalAlignment="Top" />
                 <Label Content="Account n.:" HorizontalAlignment="Left" Margin="15,41,0,0" VerticalAlignment="Top" />
             </Grid>
         </GroupBox>
+        <GroupBox x:Name="AccountDetailsGroupBox" Header="Details" HorizontalAlignment="Left" Height="166" Margin="292,46,0,0" VerticalAlignment="Top" Width="317">
+            <Grid HorizontalAlignment="Left" Height="146" Margin="10,0,-2,-2" VerticalAlignment="Top" Width="297">
+                <Button Content="Execute" HorizontalAlignment="Left" Margin="213,116,0,0" VerticalAlignment="Top" Width="74" Click="ExecuteButtonClick" />
+                <TextBox x:Name="AmountTextBox" HorizontalAlignment="Left" Height="24" Margin="148,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+                <TextBox x:Name="AccountNumberTextBox" HorizontalAlignment="Left" Height="24" Margin="148,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+                <TextBox x:Name="AccountOwnerTextBox" HorizontalAlignment="Left" Height="24" Margin="148,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" />
+                <Label Content="Amount" HorizontalAlignment="Left" Margin="90,10,0,0" VerticalAlignment="Top" />
+                <Label Content="Acc. num" HorizontalAlignment="Left" Margin="90,44,0,0" VerticalAlignment="Top" />
+                <Label Content="Acc. own." HorizontalAlignment="Left" Margin="90,80,0,0" VerticalAlignment="Top" />
+                <RadioButton x:Name="MoneyOutRadioButton" GroupName="TransType" Content="Money Out" HorizontalAlignment="Left" Height="16" Margin="1,12,0,0" VerticalAlignment="Top" Width="89" IsChecked="True" />
+                <RadioButton x:Name="MoneyInRadioButton" GroupName="TransType" Content="Money In" HorizontalAlignment="Left" Height="16" Margin="1,33,0,0" VerticalAlignment="Top" Width="89" />
+                <RadioButton x:Name="TransactionRadioButton" GroupName="TransType" Content="Transaction" HorizontalAlignment="Left" Height="16" Margin="1,54,0,0" VerticalAlignment="Top" Width="89" />
+                <RadioButton x:Name="LockAccountRadioButton" GroupName="TransType" Content="Lock/Unlock" HorizontalAlignment="Left" Height="16" Margin="1,75,0,0" VerticalAlignment="Top" Width="89" />
+            </Grid>
+        </GroupBox>
+        <Label Content="Label" HorizontalAlignment="Left" VerticalAlignment="Top" />
+        <Label Content="Selected account:" HorizontalAlignment="Left" Margin="292,15,0,0" VerticalAlignment="Top" />
+        <Label x:Name="SelectedAccountNumberLabel" Content="" HorizontalAlignment="Left" Margin="400,15,0,0" VerticalAlignment="Top" />
     </Grid>
 </Window>

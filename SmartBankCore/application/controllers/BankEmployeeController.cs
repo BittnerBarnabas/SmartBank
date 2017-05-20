@@ -13,6 +13,7 @@ namespace SmartBankCore.application.controllers
 
         public BankEmployeeController(IRepository<BankEmployee, string> repository)
         {
+            LOG.Debug(nameof(BankEmployeeController) + " is initialized.");
             _repository = repository;
         }
 

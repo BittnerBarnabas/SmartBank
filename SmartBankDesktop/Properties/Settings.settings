@@ -8,5 +8,11 @@
     <Setting Name="SmartBankGetAllUsersPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">http://localhost:49848/api/users/getAllUser</Value>
     </Setting>
+    <Setting Name="SmartBankPutTransactionPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:49848/api/transaction/putTransaction</Value>
+    </Setting>
+    <Setting Name="SmartBankToggleAccountLockPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:49848/api/bankAccount/toggleLock</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

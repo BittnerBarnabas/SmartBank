@@ -27,14 +27,13 @@ namespace SmartBankDesktop.Model.Utils
             }
         }
 
-        public static HttpResponseMessage PostToUrl<T>(string hostname, string url,
+        public static HttpResponseMessage PostToUrl<T>(string url,
             T param)
         {
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri(hostname);
                 return
-                    client.PostAsync(hostname + url, param, new JsonMediaTypeFormatter())
+                    client.PostAsync(url, param, new JsonMediaTypeFormatter())
                         .Result;
             }
         }

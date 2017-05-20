@@ -15,7 +15,9 @@ namespace SmartBankDesktop.Controller
             _mainModel = mainModel;
             _mainWindow.DataContext = this;
             _mainWindow.CurrentUserChanged +=
-                user => { SelectedUser = user; };
+                user => SelectedUser = user;
+            _mainWindow.ExecuteTransaction +=
+                transaction => _mainModel.ExecuteTransaction(transaction);
         }
 
         public string LoggedInUserName

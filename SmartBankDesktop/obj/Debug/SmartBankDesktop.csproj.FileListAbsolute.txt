@@ -27,3 +27,5 @@ C:\Users\barni\Documents\Visual Studio 2017\Projects\SmartBank\SmartBankDesktop\
 C:\Users\barni\Documents\Visual Studio 2017\Projects\SmartBank\SmartBankDesktop\bin\Debug\Microsoft.AspNetCore.Cryptography.KeyDerivation.xml
 C:\Users\barni\Documents\Visual Studio 2017\Projects\SmartBank\SmartBankDesktop\bin\Debug\Serilog.xml
 C:\Users\barni\Documents\Visual Studio 2017\Projects\SmartBank\SmartBankDesktop\bin\Debug\Serilog.Sinks.Trace.xml
+C:\Users\barni\Documents\Visual Studio 2017\Projects\SmartBank\SmartBankDesktop\obj\Debug\View\AccountEditorPage.g.cs
+C:\Users\barni\Documents\Visual Studio 2017\Projects\SmartBank\SmartBankDesktop\obj\Debug\View\AccountEditorPage.baml

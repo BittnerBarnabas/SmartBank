@@ -95,6 +95,9 @@
     <Compile Include="Model\Utils\CryptographyUtils.cs" />
     <Compile Include="Model\Utils\WebApiUtils.cs" />
     <Compile Include="Properties\Annotations.cs" />
+    <Compile Include="View\AccountEditorPage.xaml.cs">
+      <DependentUpon>AccountEditorPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
@@ -130,6 +133,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="View\AccountEditorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

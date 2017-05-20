@@ -21,6 +21,7 @@ namespace SmartBankCore.application.controllers
             ITransactionRepository<Transaction, string> transactionRepository,
             IRepository<BankAccount, int> bankAccountRepository)
         {
+            LOG.Debug(nameof(TransactionController) + " is initialized.");
             _transactionRepository = transactionRepository;
             _bankAccountRepository = bankAccountRepository;
         }
@@ -69,6 +70,11 @@ namespace SmartBankCore.application.controllers
 
             if (recipientBankAccount != null)
             {
+                if (recipientBankAccount.IsLocked)
+                {
+                    LOG.Error("Destination account is locked");
+                    return BadRequest("Destination account is locked.");
+                }
                 LOG.Information("The recipient account is an internal account");
                 recipientBankAccount.Balance += pendingTransaction.Amount;
                 _bankAccountRepository.Save(recipientBankAccount);

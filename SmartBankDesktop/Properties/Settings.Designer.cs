@@ -43,5 +43,29 @@ namespace SmartBankDesktop.Properties {
                 this["SmartBankGetAllUsersPath"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:49848/api/transaction/putTransaction")]
+        public string SmartBankPutTransactionPath {
+            get {
+                return ((string)(this["SmartBankPutTransactionPath"]));
+            }
+            set {
+                this["SmartBankPutTransactionPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:49848/api/bankAccount/toggleLock")]
+        public string SmartBankToggleAccountLockPath {
+            get {
+                return ((string)(this["SmartBankToggleAccountLockPath"]));
+            }
+            set {
+                this["SmartBankToggleAccountLockPath"] = value;
+            }
+        }
     }
 }
