@@ -86,9 +86,12 @@
     <Compile Include="Controller\IController.cs" />
     <Compile Include="Controller\LoginController.cs" />
     <Compile Include="Controller\MainWindowController.cs" />
+    <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\BankEmployee.cs" />
+    <Compile Include="Model\BankUser.cs" />
     <Compile Include="Model\LoginModel.cs" />
     <Compile Include="Model\MainModel.cs" />
+    <Compile Include="Model\Transaction.cs" />
     <Compile Include="Model\Utils\CryptographyUtils.cs" />
     <Compile Include="Model\Utils\WebApiUtils.cs" />
     <Compile Include="Properties\Annotations.cs" />

@@ -10,6 +10,20 @@
         <Label Content="Logged in as: " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" />
         <Label x:Name="UserNameLabel" Content="{Binding LoggedInUserName}" HorizontalAlignment="Left"
                Margin="94,10,0,0" VerticalAlignment="Top" Height="26" Width="82" />
-        <ComboBox HorizontalAlignment="Left" Margin="10,48,0,0" VerticalAlignment="Top" Width="84" />
+        <GroupBox Header="Bank Account Selector" HorizontalAlignment="Left" Height="166" Margin="10,46,0,0"
+                  VerticalAlignment="Top" Width="272">
+            <Grid HorizontalAlignment="Left" Height="129" Margin="5,10,0,0" VerticalAlignment="Top" Width="251">
+                <ComboBox x:Name="UserSelectorComboBox" HorizontalAlignment="Left" Margin="99,10,0,0"
+                          VerticalAlignment="Top" Width="142"
+                          ItemsSource="{Binding BankUsers}" DisplayMemberPath="Name"
+                          SelectionChanged="UserNameComboBoxSelectionChanged" />
+                <ComboBox HorizontalAlignment="Left" Margin="99,42,0,0" VerticalAlignment="Top" Width="142"
+                          ItemsSource="{Binding SelectedUser.BankAccounts}" DisplayMemberPath="AccountNumber" />
+                <Button Content="Select" HorizontalAlignment="Left" Margin="166,81,0,0" VerticalAlignment="Top"
+                        Width="75" Click="Button_Click" />
+                <Label Content="Username:" HorizontalAlignment="Left" Margin="15,7,0,0" VerticalAlignment="Top" />
+                <Label Content="Account n.:" HorizontalAlignment="Left" Margin="15,41,0,0" VerticalAlignment="Top" />
+            </Grid>
+        </GroupBox>
     </Grid>
 </Window>

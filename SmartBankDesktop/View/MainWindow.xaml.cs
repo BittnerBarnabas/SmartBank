@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
+using SmartBankDesktop.Model;
 
 namespace SmartBankDesktop.View
 {
@@ -10,6 +13,19 @@ namespace SmartBankDesktop.View
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        public event Action<BankUser> CurrentUserChanged;
+
+        private void UserNameComboBoxSelectionChanged(object sender,
+            SelectionChangedEventArgs e)
+        {
+            var s = sender as ComboBox;
+            CurrentUserChanged?.Invoke(s.SelectedItem as BankUser);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

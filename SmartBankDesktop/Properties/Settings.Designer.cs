@@ -31,5 +31,17 @@ namespace SmartBankDesktop.Properties {
                 return ((string)(this["SmartBankGetEmployeePath"]));
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:49848/api/users/getAllUser")]
+        public string SmartBankGetAllUsersPath {
+            get {
+                return ((string)(this["SmartBankGetAllUsersPath"]));
+            }
+            set {
+                this["SmartBankGetAllUsersPath"] = value;
+            }
+        }
     }
 }

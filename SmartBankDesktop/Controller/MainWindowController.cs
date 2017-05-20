@@ -1,4 +1,5 @@
-﻿using SmartBankDesktop.Model;
+﻿using System.Collections.Generic;
+using SmartBankDesktop.Model;
 using SmartBankDesktop.View;
 
 namespace SmartBankDesktop.Controller
@@ -13,6 +14,8 @@ namespace SmartBankDesktop.Controller
             _mainWindow = mainWindow;
             _mainModel = mainModel;
             _mainWindow.DataContext = this;
+            _mainWindow.CurrentUserChanged +=
+                user => { SelectedUser = user; };
         }
 
         public string LoggedInUserName
@@ -25,9 +28,32 @@ namespace SmartBankDesktop.Controller
             }
         }
 
+        public IEnumerable<BankUser> BankUsers
+        {
+            get { return _mainModel.BankUsers; }
+            set
+            {
+                _mainModel.BankUsers = value;
+                OnPropertyChanged(nameof(BankUsers));
+            }
+        }
+
+        public BankUser SelectedUser
+        {
+            get { return _mainModel.SelectedUser; }
+            set
+            {
+                _mainModel.SelectedUser = value;
+                OnPropertyChanged(nameof(SelectedUser));
+            }
+        }
+
         public void ShowView()
         {
+            _mainModel.PopulateDataForDispay();
             _mainWindow.Show();
+
+            BankUsers = _mainModel.BankUsers;
         }
     }
 }

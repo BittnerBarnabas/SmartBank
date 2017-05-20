@@ -32,6 +32,14 @@ namespace SmartBankCore.application.controllers
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("getAllUser")]
+        public IHttpActionResult GetAllBankUsers()
+        {
+            LOG.Debug("Getting all bank users");
+            return Ok(_repository.FindAll());
+        }
+
         [HttpPost]
         [Route("adduser")]
         public IHttpActionResult PutBankUser(BankUser user)
