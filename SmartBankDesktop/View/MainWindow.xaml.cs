@@ -35,7 +35,7 @@ namespace SmartBankDesktop.View
             SelectedAccountNumberLabel.Content = AccountSelectorComboBox.Text;
             AccountDetailsGroupBox.Visibility = Visibility.Visible;
 
-            if (((BankAccount) AccountSelectorComboBox.SelectedItem).IsLocked)
+            if (((BankAccount)AccountSelectorComboBox.SelectedItem).IsLocked)
                 LockedAccountLabel.Visibility = Visibility.Visible;
             else
                 LockedAccountLabel.Visibility = Visibility.Hidden;
@@ -81,7 +81,7 @@ namespace SmartBankDesktop.View
             }
             else if (LockAccountRadioButton.IsChecked.Value)
             {
-                var account = (BankAccount) AccountSelectorComboBox.SelectedItem;
+                var account = (BankAccount)AccountSelectorComboBox.SelectedItem;
                 if (account.IsLocked)
                 {
                     if (MessageBox.Show(

@@ -38,7 +38,7 @@ namespace SmartBankCore.application.controllers
 
         [HttpPost]
         [Route("putTransaction")]
-        public IHttpActionResult ExecuteTranasction(Transaction pendingTransaction)
+        public IHttpActionResult ExecuteTransaction(Transaction pendingTransaction)
         {
             LOG.Information("Starting to execute tranasction: {0}", pendingTransaction);
 
