@@ -14,11 +14,14 @@ namespace SmartBankDesktop.View
         {
             InitializeComponent();
             AccountDetailsGroupBox.Visibility = Visibility.Hidden;
+            LockedAccountLabel.Visibility = Visibility.Hidden;
         }
 
         public event Action<BankUser> CurrentUserChanged;
 
         public event Action<Transaction> ExecuteTransaction;
+
+        public event Action<int> ToggleAccountLock;
 
         private void UserNameComboBoxSelectionChanged(object sender,
             SelectionChangedEventArgs e)
@@ -31,6 +34,11 @@ namespace SmartBankDesktop.View
         {
             SelectedAccountNumberLabel.Content = AccountSelectorComboBox.Text;
             AccountDetailsGroupBox.Visibility = Visibility.Visible;
+
+            if (((BankAccount) AccountSelectorComboBox.SelectedItem).IsLocked)
+                LockedAccountLabel.Visibility = Visibility.Visible;
+            else
+                LockedAccountLabel.Visibility = Visibility.Hidden;
         }
 
         private void ExecuteButtonClick(object sender, RoutedEventArgs e)
@@ -73,12 +81,29 @@ namespace SmartBankDesktop.View
             }
             else if (LockAccountRadioButton.IsChecked.Value)
             {
-                if (((BankAccount)AccountSelectorComboBox.SelectedItem).IsLocked)
-                    if (MessageBox.Show("Unlock/Lock account",
+                var account = (BankAccount) AccountSelectorComboBox.SelectedItem;
+                if (account.IsLocked)
+                {
+                    if (MessageBox.Show(
                             "Account is Locked, are you sure you want to unlock it?",
+                            "Unlock/Lock account",
                             MessageBoxButton.YesNo) == MessageBoxResult.Yes)
                     {
+                        LockedAccountLabel.Visibility = Visibility.Hidden;
+                        ToggleAccountLock?.Invoke(account.AccountNumber);
                     }
+                }
+                else
+                {
+                    if (MessageBox.Show(
+                            "Account is not Locked, are you sure you want to lock it?",
+                            "Unlock/Lock account",
+                            MessageBoxButton.YesNo) == MessageBoxResult.Yes)
+                    {
+                        LockedAccountLabel.Visibility = Visibility.Visible;
+                        ToggleAccountLock?.Invoke(account.AccountNumber);
+                    }
+                }
             }
         }
     }

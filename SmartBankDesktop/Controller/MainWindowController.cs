@@ -18,6 +18,8 @@ namespace SmartBankDesktop.Controller
                 user => SelectedUser = user;
             _mainWindow.ExecuteTransaction +=
                 transaction => _mainModel.ExecuteTransaction(transaction);
+            _mainWindow.ToggleAccountLock +=
+                accountNumber => _mainModel.ToggleLockForAccountNumber(accountNumber);
         }
 
         public string LoggedInUserName

@@ -34,7 +34,9 @@ namespace SmartBankDesktop.Model
         public void ToggleLockForAccountNumber(int id)
         {
             LOG.Information("Sending action to toggle lock for account {id}", id);
-            WebApiUtils.PostToUrl(Settings.Default.SmartBankToggleAccountLockPath, id);
+            var resoponse =
+                WebApiUtils.PostToUrl(
+                    Settings.Default.SmartBankToggleAccountLockPath + "?id=" + id, id);
         }
     }
 }
